@@ -63,6 +63,7 @@ class CryptoBot:
         self._post_loss_reduction: Decimal = Decimal("1")
         self._position_cost_this_round: Decimal = Decimal("0")
         self._last_fetch_time: float = 0.0
+        self._price_streak: dict[str, int] = {}
         self._circuit_breaker_reason: str | None = None
         self._resolved_count: int = 0
         self._last_resolve_log: dict[str, Any] = {}
@@ -232,6 +233,7 @@ class CryptoBot:
             await asyncio.sleep(delay)
 
         entered_coins: set[str] = set()
+        self._price_streak.clear()
 
         while (end_ts - int(time.time())) > 3:
             remaining = end_ts - int(time.time())
@@ -256,22 +258,49 @@ class CryptoBot:
                     continue
                 yes, no = prices
 
-                if yes > no and yes >= threshold:
-                    tid = self._pick_token(market, "YES")
-                    if tid:
-                        new_entries.append((coin, "YES", tid, yes, market))
-                        entered_coins.add(coin)
-                elif no > yes and no >= threshold:
-                    tid = self._pick_token(market, "NO")
-                    if tid:
-                        new_entries.append((coin, "NO", tid, no, market))
-                        entered_coins.add(coin)
+                if yes > no:
+                    side, price_cents = "YES", yes
+                elif no > yes:
+                    side, price_cents = "NO", no
+                else:
+                    continue
+
+                if price_cents < threshold:
+                    self._price_streak[coin] = 0
+                    continue
+
+                streak = self._price_streak.get(coin, 0) + 1
+                self._price_streak[coin] = streak
+
+                if streak < 3:
+                    continue
+
+                tid = self._pick_token(market, side)
+                if tid is None:
+                    continue
+
+                liq = 0.0
+                try:
+                    liq = float(market.get("liquidity", 0) or 0)
+                except (ValueError, TypeError):
+                    pass
+                slippage = self._slippage_pct(liq, remaining)
+                fee_pct = Decimal(str(self._cfg.trading.default_fee_pct))
+                max_price = int((Decimal("99")) / (Decimal("1") + (slippage + fee_pct) / Decimal("100")))
+
+                if price_cents > max_price:
+                    if streak <= 3 or streak % 10 == 0:
+                        log.info(f"  {coin.upper()} {side} {price_cents}¢ > max {max_price}¢ after costs, skip")
+                    continue
+
+                new_entries.append((coin, side, tid, price_cents, market))
+                entered_coins.add(coin)
 
             if new_entries:
                 tasks = []
                 for coin, side, tid, pc, mk in new_entries:
                     tasks.append(self._open_position(coin, side, tid, pc, mk, remaining))
-                    log.info(f"  ▶ ENTER {coin.upper()} {side} at {pc}¢ (winning sentiment)")
+                    log.info(f"  ▶ ENTER {coin.upper()} {side} at {pc}¢ (streak={self._price_streak[coin]})")
                 await asyncio.gather(*tasks)
 
             if remaining % 10 == 0 or remaining <= 10:

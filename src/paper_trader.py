@@ -370,5 +370,4 @@ class PaperTrader:
                 count=len(self._open_positions),
             )
         self._save_stats()
-        self._log_portfolio()
         await self._http.aclose()
