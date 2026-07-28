@@ -1,10 +1,11 @@
 __pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
 .env
 venv/
-cryptosnipervenv/
 logs/
 data/
-bucket_stats.json
-/tmp/crypto_bot_kill.lock
+
+# Local overrides — never commit secrets to the tracked config.
+config.local.yaml

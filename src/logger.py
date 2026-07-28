@@ -1,7 +1,7 @@
-import structlog
 import logging
-import os
 from pathlib import Path
+
+import structlog
 
 
 def setup_logging(level: str = "INFO", log_file: str | None = None) -> None:
@@ -9,7 +9,6 @@ def setup_logging(level: str = "INFO", log_file: str | None = None) -> None:
 
     logging.getLogger("httpx").setLevel(logging.WARNING)
     logging.getLogger("httpcore").setLevel(logging.WARNING)
-    logging.getLogger("websockets").setLevel(logging.WARNING)
 
     processors = [
         structlog.stdlib.add_log_level,

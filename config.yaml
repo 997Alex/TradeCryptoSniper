@@ -1,92 +1,48 @@
-chain:
-  rpc_url: "https://polygon-rpc.com"
-  poly_contracts:
-    exchange: "0x4bFb41d5B3570CfD8d127C5bD85D9A6F9b7b6c6b"
-    ctp: "0x4D97DCd97eC945f40cF473F4d1C7A1c9e5Fc3c7c"
-    usdc: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"
-
 polymarket:
   gamma_api_base: "https://gamma-api.polymarket.com"
   clob_api_base: "https://clob.polymarket.com"
-  ws_url: "wss://ws-subscriptions-clob.polymarket.com/ws/market"
-  rate_limit_rps: 5
-
-wallet:
-  private_key: ""
-  address: ""
+  # Client-side cap, applied per API host.
+  rate_limit_rps: 20
 
 trading:
-  max_spend_per_trade_usd: 50
+  # Base slippage; scaled by liquidity and time-to-resolve in CryptoBot._slippage_pct.
   max_slippage_pct: 1.0
-  default_fee_pct: 0.5
-  order_type: "FOK"
-  partial_fill_min_pct: 50.0
-  stale_price_max_age_ms: 2000
-  min_price_cents: 90
-
-resolution_arb:
-  enabled: true
-  max_hours_since_end: 72
-  max_spend_per_trade_usd: 100
-  min_price_cents: 85
-  min_liquidity_usd: 100
-  categories:
-    - "Sports"
-    - "Politics"
+  stale_price_max_age_ms: 3000
 
 paper_trading:
-  enabled: true
   initial_balance_usd: 100
-  resolve_check_interval_sec: 60
-  max_concurrent_trades: 10
-
 
 crypto_5m:
-  enabled: true
+  # Window timing. The entry ladder itself (90c -> 80c) lives in CryptoBot._threshold.
   execute_at_seconds: 20
   monitor_start_seconds: 60
-  early_price_cents: 92
-  final_price_cents: 78
-  early_entry_price_cents: 95
   poll_interval_seconds: 0.5
+  # Only fetch the CLOB order book for coins within this many cents of the threshold.
+  book_enrich_margin_cents: 10
+
+  # Position sizing
   risk_per_trade_pct: 10
   max_bet_usd_cap: 50
   kelly_fraction: 0.25
   min_data_trades: 5
   default_win_rate: 0.60
+  min_liquidity_usd_entry: 200.0
+
+  # Risk controls
   loss_size_multiplier: 0.50
   win_streak_restore: 3
   max_daily_drawdown_pct: 15.0
   max_consecutive_losses: 3
   loss_cooldown_seconds: 3600
+  no_trade_cooldown_seconds: 300
   max_exposure_per_round_pct: 25.0
-  min_resolve_buffer_seconds: 5
-  slippage_model_pct: 0.5
-  min_liquidity_usd_entry: 200.0
-  liquidity_weight: 0.3
-
-scanner:
-  scan_interval_sec: 60
-  min_liquidity_usd: 200
-  max_minutes_to_resolution: 43200
-  min_price_cents: 90
+  # A position still unresolved after this long is written off as lost capital.
+  unresolved_max_age_seconds: 900
 
 kill_switch:
   enabled: true
   lock_file_path: "/tmp/crypto_bot_kill.lock"
-  check_interval_sec: 5
-
-websocket:
-  reconnect_base_delay_sec: 1.0
-  reconnect_max_delay_sec: 30.0
-
-alerts:
-  telegram:
-    enabled: false
-    bot_token: ""
-    chat_id: ""
-  min_balance_usd: 100
 
 logging:
   level: "INFO"
-  file: "logs/sniper.log"
+  file: "logs/crypto_bot.log"
