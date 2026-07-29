@@ -4,7 +4,7 @@ import asyncio
 import json
 import os
 import time
-from decimal import Decimal
+from decimal import Decimal, ROUND_HALF_UP
 from typing import Any
 
 import httpx
@@ -17,6 +17,7 @@ log = get_logger("crypto_bot")
 
 CRYPTO_COINS = ["btc", "eth", "sol", "xrp", "doge"]
 WINDOW_SECONDS = 300
+HOUR_SECONDS = 3600
 
 SEP = "=" * 68
 SUB_SEP = "-" * 68
@@ -66,6 +67,17 @@ class CryptoBot:
         self._last_resolve_log: dict[str, Any] = {}
         self._trade_by_token: dict[str, dict] = {}
 
+        # real-time breaker flag: flipped by the resolution monitor the instant a
+        # circuit breaker condition is met, instead of only being checked once per
+        # 5-minute round in run(). The entry loop in _process_window polls this so
+        # a drawdown/loss-streak trip mid-round stops new entries immediately.
+        self._halt_new_entries: bool = False
+
+        # hourly PnL tracking, so "guadagno medio orario" is a number you can
+        # actually see in the log instead of inferring from scattered round
+        # summaries.
+        self._hour_start_ts: float = 0.0
+        self._hour_start_equity_cents: Decimal = Decimal("0")
 
     # ── entry points ────────────────────────────────────────────
 
@@ -73,6 +85,8 @@ class CryptoBot:
         self._running = True
         self._session_start_balance = self._paper.balance_usd
         self._session_start_ts = time.time()
+        self._hour_start_ts = self._session_start_ts
+        self._hour_start_equity_cents = self._paper.equity_cents
         log.info("crypto_bot_started")
 
         monitor_task = asyncio.create_task(self._resolution_monitor())
@@ -80,6 +94,10 @@ class CryptoBot:
         try:
             while self._running:
                 now_ts_int = int(time.time())
+
+                if now_ts_int - self._hour_start_ts >= HOUR_SECONDS:
+                    self._log_hourly_pnl(now_ts_int)
+
                 window_ts = (now_ts_int // WINDOW_SECONDS) * WINDOW_SECONDS
 
                 if window_ts == self._last_window_ts:
@@ -103,6 +121,9 @@ class CryptoBot:
                 await self._process_window(window_ts)
         except asyncio.CancelledError:
             pass
+        except BaseException as exc:
+            log.critical("run_loop_exception", error=str(exc), exc_info=True)
+            raise
         finally:
             monitor_task.cancel()
             try:
@@ -110,6 +131,25 @@ class CryptoBot:
             except asyncio.CancelledError:
                 pass
             await self._shutdown()
+
+    def _log_hourly_pnl(self, now_ts_int: int) -> None:
+        equity_now = self._paper.equity_cents
+        pnl_cents = equity_now - self._hour_start_equity_cents
+        pnl_usd = pnl_cents / Decimal("100")
+        pnl_pct = (
+            float(pnl_cents / self._hour_start_equity_cents * Decimal("100"))
+            if self._hour_start_equity_cents > 0
+            else 0.0
+        )
+        log.info(
+            f"{SUB_SEP}\n"
+            f"  HOURLY PNL: ${pnl_usd:.2f} ({pnl_pct:+.2f}%)  |  "
+            f"equity: ${equity_now / Decimal('100'):.2f}  |  "
+            f"open_exposure: ${self._paper.open_exposure_cents / Decimal('100'):.2f}\n"
+            f"{SUB_SEP}"
+        )
+        self._hour_start_ts = now_ts_int
+        self._hour_start_equity_cents = equity_now
 
     # ── circuit breakers ────────────────────────────────────────
 
@@ -121,13 +161,24 @@ class CryptoBot:
             self._circuit_breaker_reason = f"loss_cooldown_{remaining}s"
             return True
 
+        # Drawdown is measured against CASH, not "equity" (cash + cost basis of
+        # still-open positions). The old formula used max(cash, equity), which
+        # -- since equity = cash + open cost basis >= cash -- always picked
+        # equity and so treated every open, unresolved bet as if it were already
+        # a guaranteed win. That's precisely why the breaker in the log never
+        # fired until AFTER a cluster of correlated positions had already
+        # resolved as losses (19.5% overshoot vs the 15% target): the real risk
+        # sitting in open positions was invisible to the check until it was too
+        # late. Using cash alone assumes the conservative case (open bets could
+        # still lose) and reacts before the damage lands, not after.
         cash = self._paper.balance_usd
         equity_usd = self._paper.equity_cents / Decimal("100")
         if self._session_start_balance > Decimal("0"):
-            dd_pct = float((self._session_start_balance - max(cash, equity_usd)) / self._session_start_balance * Decimal("100"))
+            dd_pct = float((self._session_start_balance - cash) / self._session_start_balance * Decimal("100"))
             if dd_pct >= c.max_daily_drawdown_pct:
                 self._circuit_breaker_reason = (
-                    f"drawdown_{dd_pct:.1f}%_>={c.max_daily_drawdown_pct}%"
+                    f"drawdown_{dd_pct:.1f}%_>={c.max_daily_drawdown_pct}%_"
+                    f"(cash=${cash:.2f}_equity=${equity_usd:.2f})"
                 )
                 return True
 
@@ -175,6 +226,16 @@ class CryptoBot:
                         if self._consecutive_losses >= self._cfg.crypto_5m.max_consecutive_losses:
                             self._loss_streak_until = time.time() + self._cfg.crypto_5m.loss_cooldown_seconds
                             log.warning(f"  loss streak {self._consecutive_losses}, cooldown {self._cfg.crypto_5m.loss_cooldown_seconds}s")
+
+                # Re-evaluate breakers immediately after processing resolutions
+                # (not just once per 5-minute round loop in run()) and latch the
+                # result so an in-progress round's entry loop can see it and stop
+                # opening new positions right away instead of finishing the round
+                # first.
+                halted = self._check_circuit_breakers()
+                if halted and not self._halt_new_entries:
+                    log.warning(f"  circuit breaker tripped mid-session: {self._circuit_breaker_reason}")
+                self._halt_new_entries = halted
             except Exception as exc:
                 log.warning("resolution_monitor_error", error=str(exc))
             await asyncio.sleep(check_interval)
@@ -220,6 +281,7 @@ class CryptoBot:
             f"  ROUND {self._round}  |  {label} → {end_label}  |  "
             f"equity: ${self._paper.equity_cents / Decimal('100'):.2f}  |  "
             f"cash: ${self._paper.balance_usd:.2f}  |  "
+            f"open_exposure: ${self._paper.open_exposure_cents / Decimal('100'):.2f}  |  "
             f"risk: {risk_pct:.0f}%  |  "
             f"max_bet: ${self._paper.balance_usd * Decimal(str(risk_pct)) / Decimal('100'):.2f}\n"
             f"  {SEP}"
@@ -233,6 +295,10 @@ class CryptoBot:
         self._price_streak.clear()
 
         while (end_ts - int(time.time())) > 3:
+            if self._halt_new_entries:
+                log.warning(f"  circuit breaker active ({self._circuit_breaker_reason}), halting new entries for the rest of this round")
+                break
+
             remaining = end_ts - int(time.time())
             threshold = self._threshold(remaining)
 
@@ -283,8 +349,15 @@ class CryptoBot:
                     pass
                 slippage = self._slippage_pct(liq, remaining)
                 fee_pct = Decimal(str(self._cfg.trading.default_fee_pct))
-                # require more profit early, less when time is short
-                min_profit = 3 if remaining > 20 else (2 if remaining > 8 else 1)
+                # Fixed minimum net edge required after fees/slippage/gas. This no
+                # longer relaxes as the deadline approaches -- the old ladder
+                # (3c / 2c / 1c depending on time left) is exactly how the bot
+                # ended up paying 96-99c for coins with essentially zero real
+                # edge left once costs were accounted for. Now the floor is
+                # constant, so a winning trade always nets a positive amount
+                # after fees + a fixed gas/slippage-model-error buffer, and a
+                # near-certain (99c) market simply never qualifies.
+                min_profit = c.min_net_edge_cents + c.gas_buffer_cents
                 target_payout = Decimal(str(100 - min_profit))
                 max_price = int(target_payout / (Decimal("1") + (slippage + fee_pct) / Decimal("100")))
 
@@ -300,7 +373,6 @@ class CryptoBot:
                 tasks = []
                 for coin, side, tid, pc, mk in new_entries:
                     tasks.append(self._open_position(coin, side, tid, pc, mk, remaining))
-                    log.info(f"  ▶ ENTER {coin.upper()} {side} at {pc}¢ (streak={self._price_streak[coin]})")
                 await asyncio.gather(*tasks)
 
             if remaining % 10 == 0 or remaining <= 10:
@@ -314,10 +386,7 @@ class CryptoBot:
             await asyncio.sleep(remaining)
 
         if not entered_coins:
-            c = self._cfg.crypto_5m
-            cooldown = c.loss_cooldown_seconds // 12
-            self._loss_streak_until = time.time() + cooldown
-            log.warning(f"  no trades this round, cooldown {cooldown}s")
+            log.info("  no trades this round, continuing to next window")
             self._last_window_ts = window_ts
             return
 
@@ -494,6 +563,32 @@ class CryptoBot:
                 log.info(f"  {coin.upper()} liquidity ${liquidity:.0f} < ${c.min_liquidity_usd_entry:.0f}")
                 return
 
+        # ── correlation / concentration guards ───────────────────
+        # These run BEFORE sizing and are independent of the per-round exposure
+        # cap below. They are what actually stops a single correlated crypto
+        # move (BTC/ETH/SOL/XRP/DOGE tend to move together within the same
+        # 5-minute window) from stacking several full-size same-direction bets
+        # that all resolve against the bot at once -- which is exactly what
+        # produced the 19.5% drawdown in round 24 (multiple positions opened
+        # across several earlier rounds, still unresolved, all lost together).
+        open_positions_count = self._paper.total_open_positions
+        if open_positions_count >= c.max_concurrent_open_positions:
+            log.info(
+                f"  {coin.upper()} max_concurrent_positions {open_positions_count} "
+                f">= {c.max_concurrent_open_positions}, skip"
+            )
+            return
+
+        open_exposure_cents = self._paper.open_exposure_cents
+        equity_cents = self._paper.equity_cents
+        max_total_exposure_cents = equity_cents * Decimal(str(c.max_total_exposure_pct)) / Decimal("100")
+        if open_exposure_cents >= max_total_exposure_cents:
+            log.info(
+                f"  {coin.upper()} global_exposure_cap "
+                f"${float(open_exposure_cents)/100:.2f} >= ${float(max_total_exposure_cents)/100:.2f}, skip"
+            )
+            return
+
         slot_exposure = self._position_cost_this_round
         max_exposure = self._paper.balance_usd * Decimal(str(c.max_exposure_per_round_pct)) / Decimal("100")
         if slot_exposure >= max_exposure:
@@ -501,24 +596,9 @@ class CryptoBot:
             return
 
         price_dec = Decimal(str(price_cents)) / Decimal("100")
-        trade_count = self._paper.bucket_trade_count(price_cents)
 
-        if trade_count < c.min_data_trades:
-            fallback_pct = Decimal(str(c.risk_per_trade_pct)) / Decimal("200")
-            invest = self._paper.balance_usd * fallback_pct
-            kelly_pct = fallback_pct
-        else:
-            win_rate = self._paper.bucket_win_rate(price_cents, default=c.default_win_rate)
-            margin = Decimal(str(max(1, 100 - price_cents)))
-            b = margin / (price_dec * Decimal("100"))
-            if b > Decimal("0"):
-                kelly_pct = Decimal(str(win_rate)) - (Decimal("1") - Decimal(str(win_rate))) / b
-            else:
-                kelly_pct = Decimal("0")
-            kelly_pct = max(Decimal("0"), kelly_pct)
-            kelly_pct *= Decimal(str(c.kelly_fraction))
-            kelly_pct = min(kelly_pct, Decimal(str(c.risk_per_trade_pct)) / Decimal("100"))
-            invest = self._paper.balance_usd * kelly_pct
+        # Fixed bet in whole dollars (decoupled from balance growth)
+        invest = Decimal(str(c.fixed_bet_usd))
 
         if c.max_bet_usd_cap > 0:
             cap = Decimal(str(c.max_bet_usd_cap))
@@ -529,14 +609,25 @@ class CryptoBot:
 
         invest *= self._post_loss_reduction
 
-        invest = invest.quantize(Decimal("0.01"))
+        # Correlation dampening: each additional concurrently-open position is
+        # treated as partially the same bet rather than an independent one, so
+        # size shrinks as the open cluster grows (1x, 1/2x, 1/3x, ...) instead
+        # of stacking full-size correlated risk on every coin that happens to
+        # be showing the same momentum in the same 5 minutes.
+        correlation_factor = Decimal("1") / Decimal(str(1 + open_positions_count))
+        invest *= correlation_factor
+
+        # Round to nearest whole dollar
+        invest = invest.quantize(Decimal("1"), rounding=ROUND_HALF_UP)
 
         remaining_exposure = max_exposure - slot_exposure
         invest = min(invest, remaining_exposure)
 
+        remaining_global_exposure_usd = (max_total_exposure_cents - open_exposure_cents) / Decimal("100")
+        invest = min(invest, remaining_global_exposure_usd)
+
         if invest < Decimal("1"):
-            log.info(f"  investment ${invest:.2f} too small (< $1)")
-            return
+            invest = Decimal("1")
 
         size = (invest / price_dec).quantize(Decimal("0.0001"))
 
@@ -546,6 +637,7 @@ class CryptoBot:
         )
 
         if result.status == "filled":
+            log.info(f"  ▶ ENTER {coin.upper()} {side} at {price_cents}¢ (streak={self._price_streak.get(coin, 0)})")
             trade = {"coin": coin, "side": side, "entry": price_cents, "won": None, "profit": Decimal("0")}
             self._round_trades.append(trade)
             self._trade_by_token[token_id] = trade
@@ -573,7 +665,8 @@ class CryptoBot:
             f"  ROUND {self._round} SUMMARY  |  "
             f"equity: ${self._paper.equity_cents / Decimal('100'):.2f}  |  "
             f"cash: ${s['cash_balance']}  |  "
-            f"trades: {s['resolved_trades']}  |  "
+            f"open: {s['open_positions']}  |  "
+            f"resolved: {s['resolved_trades']}  |  "
             f"wins: {wins}  |  "
             f"losses: {losses}  |  "
             f"WR: {wr}  |  "
@@ -686,8 +779,8 @@ class CryptoBot:
         log.info(
             f"{SEP}\n"
             f"  BOT SHUTDOWN  |  rounds: {self._round}  |  final PnL: ${pnl:.2f}\n"
-            f"  balance: ${s['cash_balance']}  |  "
-            f"trades: {s['resolved_trades']}  |  "
+            f"  cash: ${s['cash_balance']}  |  "
+            f"resolved: {s['resolved_trades']}  |  "
             f"wins: {s['wins']}  |  "
             f"losses: {s['losses']}\n{SEP}"
         )
@@ -695,4 +788,5 @@ class CryptoBot:
         await self._paper.close()
 
     def stop(self):
+        log.warning("stop_called")
         self._running = False

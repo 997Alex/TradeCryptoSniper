@@ -49,21 +49,37 @@ crypto_5m:
   final_price_cents: 78
   early_entry_price_cents: 95
   poll_interval_seconds: 0.5
-  risk_per_trade_pct: 10
-  max_bet_usd_cap: 50
-  kelly_fraction: 0.25
+  # was 10 -> smaller per-trade base size; combined with the correlation decay
+  # in _open_position this keeps the worst-case correlated cluster loss well
+  # under the drawdown breaker instead of right up against it.
+  fixed_bet_usd: 2
+  risk_per_trade_pct: 6
+  max_bet_usd_cap: 6
+  # was 0.25 -> slightly more conservative fractional-Kelly multiplier.
+  kelly_fraction: 0.20
   min_data_trades: 5
   default_win_rate: 0.60
+  # was 0.50 -> cut size harder after a loss (35% of normal) instead of half,
+  # so a loss streak de-risks faster than it did.
   loss_size_multiplier: 0.50
   win_streak_restore: 3
+  # kept at 15% as the hard emergency stop, but it should now be structurally
+  # unreachable in normal operation because max_total_exposure_pct below caps
+  # the worst-case single-shot loss at ~10% of equity.
   max_daily_drawdown_pct: 15.0
   max_consecutive_losses: 3
   loss_cooldown_seconds: 3600
-  max_exposure_per_round_pct: 25.0
+  # was 25 -> per-round spend cap tightened to match the new global cap below.
+  max_exposure_per_round_pct: 10.0
   min_resolve_buffer_seconds: 5
   slippage_model_pct: 0.5
   min_liquidity_usd_entry: 200.0
   liquidity_weight: 0.3
+  # ── new: cross-round / correlation controls (see src/config.py) ──
+  max_total_exposure_pct: 10.0
+  max_concurrent_open_positions: 4
+  min_net_edge_cents: 4
+  gas_buffer_cents: 1
 
 scanner:
   scan_interval_sec: 60

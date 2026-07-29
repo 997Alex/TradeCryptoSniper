@@ -59,7 +59,8 @@ class Crypto5mConfig(BaseModel):
     early_entry_price_cents: int = 95
     poll_interval_seconds: float = 0.5
     risk_per_trade_pct: float = 10.0
-    max_bet_usd_cap: float = 50.0
+    max_bet_usd_cap: float = 6.0
+    fixed_bet_usd: int = 2
     kelly_fraction: float = 0.25
     min_data_trades: int = 5
     default_win_rate: float = 0.60
@@ -73,6 +74,27 @@ class Crypto5mConfig(BaseModel):
     slippage_model_pct: float = 0.5
     min_liquidity_usd_entry: float = 200.0
     liquidity_weight: float = 0.3
+
+    # ── added: cross-round / correlation risk controls ──────────
+    # Hard cap on TOTAL unresolved cost basis (all open positions, all rounds
+    # combined) as a % of equity. This is what actually bounds the worst-case
+    # single-shot loss from a correlated multi-coin move -- max_exposure_per_round_pct
+    # alone does not, because it resets every 5-minute round while positions opened
+    # in earlier rounds can still be unresolved and sitting at risk.
+    max_total_exposure_pct: float = 10.0
+    # Hard cap on the number of simultaneously OPEN (unresolved) positions,
+    # regardless of which round opened them. BTC/ETH/SOL/XRP/DOGE 5-min direction
+    # bets are highly correlated, so this is really a cap on cluster size for a
+    # single correlated bet dressed up as "5 diversified coins".
+    max_concurrent_open_positions: int = 4
+    # Minimum required net edge in cents (after fee + slippage) that must remain
+    # BEFORE a trade is allowed, and it does NOT shrink under time pressure near
+    # the round deadline (the old code let this floor to 1c with 8s left, which
+    # is how it ended up paying 96-99c for a coin with ~0 real edge left).
+    min_net_edge_cents: int = 4
+    # Extra fixed cents buffer on top of min_net_edge_cents to absorb gas / worse
+    # fills than the simulated slippage model assumes when this goes live.
+    gas_buffer_cents: int = 1
 
 
 class KillSwitchConfig(BaseModel):
