@@ -40,9 +40,6 @@ class CryptoBot:
 
         self._http = httpx.AsyncClient(base_url=self._gamma_base, timeout=15)
 
-        self._clob_base = cfg.polymarket.clob_api_base.rstrip("/")
-        self._clob_http = httpx.AsyncClient(base_url=self._clob_base, timeout=10)
-
         c5 = cfg.crypto_5m
         paper_cfg = PaperTradingConfig(
             enabled=True,
@@ -286,7 +283,10 @@ class CryptoBot:
                     pass
                 slippage = self._slippage_pct(liq, remaining)
                 fee_pct = Decimal(str(self._cfg.trading.default_fee_pct))
-                max_price = int((Decimal("99")) / (Decimal("1") + (slippage + fee_pct) / Decimal("100")))
+                # require more profit early, less when time is short
+                min_profit = 3 if remaining > 20 else (2 if remaining > 8 else 1)
+                target_payout = Decimal(str(100 - min_profit))
+                max_price = int(target_payout / (Decimal("1") + (slippage + fee_pct) / Decimal("100")))
 
                 if price_cents > max_price:
                     if streak <= 3 or streak % 10 == 0:
@@ -612,11 +612,11 @@ class CryptoBot:
 
     def _threshold(self, remaining_s: int) -> int:
         if remaining_s <= 3:
-            return 80
-        if remaining_s <= 36:
-            progress = (36 - remaining_s) / (36 - 3)
-            return int(90 - progress * 10)
-        return 90
+            return 72
+        if remaining_s <= 75:
+            progress = (75 - remaining_s) / (75 - 3)
+            return int(80 - progress * 8)
+        return 80
 
     async def _fetch_events(
         self, window_ts: int
@@ -642,46 +642,7 @@ class CryptoBot:
         result: dict[str, dict[str, Any]] = {c: ev for c, ev in results if ev is not None}
         if result:
             self._last_fetch_time = time.time()
-            await self._enrich_with_book_prices(result)
         return result
-
-    async def _enrich_with_book_prices(self, events: dict[str, dict[str, Any]]) -> None:
-        async def _mid_price(token_id: str) -> Decimal | None:
-            try:
-                resp = await self._clob_http.get("/book", params={"token_id": token_id})
-                if resp.status_code != 200:
-                    return None
-                data = resp.json()
-                bids = data.get("bids", [])
-                asks = data.get("asks", [])
-                best_bid = Decimal(str(bids[0]["price"])) if bids else None
-                best_ask = Decimal(str(asks[0]["price"])) if asks else None
-                if best_bid and best_ask:
-                    return (best_bid + best_ask) / Decimal("2")
-                return best_bid or best_ask
-            except Exception:
-                return None
-
-        async def _enrich_market(market: dict) -> None:
-            raw_ids = market.get("clobTokenIds")
-            if not raw_ids:
-                return
-            ids: list[str] = []
-            if isinstance(raw_ids, list):
-                ids = [str(x) for x in raw_ids]
-            elif isinstance(raw_ids, str):
-                try:
-                    ids = json.loads(raw_ids)
-                except (json.JSONDecodeError, TypeError):
-                    ids = [raw_ids]
-            if len(ids) < 2:
-                return
-            yes_p, no_p = await asyncio.gather(_mid_price(ids[0]), _mid_price(ids[1]))
-            if yes_p is not None and no_p is not None:
-                market["outcomePrices"] = [float(yes_p), float(no_p)]
-
-        tasks = [_enrich_market(ev["market"]) for ev in events.values()]
-        await asyncio.gather(*tasks)
 
     def _parse_prices(self, m: dict) -> tuple[int, int] | None:
         raw = m.get("outcomePrices")
@@ -731,7 +692,6 @@ class CryptoBot:
             f"losses: {s['losses']}\n{SEP}"
         )
         await self._http.aclose()
-        await self._clob_http.aclose()
         await self._paper.close()
 
     def stop(self):

@@ -44,7 +44,7 @@ paper_trading:
 crypto_5m:
   enabled: true
   execute_at_seconds: 20
-  monitor_start_seconds: 60
+  monitor_start_seconds: 90
   early_price_cents: 92
   final_price_cents: 78
   early_entry_price_cents: 95
