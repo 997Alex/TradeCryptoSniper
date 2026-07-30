@@ -5,6 +5,7 @@ import json
 import os
 import time
 from decimal import Decimal, ROUND_HALF_UP
+from pathlib import Path
 from typing import Any
 
 import httpx
@@ -79,6 +80,8 @@ class CryptoBot:
         self._hour_start_ts: float = 0.0
         self._hour_start_equity_cents: Decimal = Decimal("0")
 
+        self._load_state()
+
     # ── entry points ────────────────────────────────────────────
 
     async def run(self):
@@ -150,6 +153,43 @@ class CryptoBot:
         )
         self._hour_start_ts = now_ts_int
         self._hour_start_equity_cents = equity_now
+
+    # ── state persistence ──────────────────────────────────────
+
+    def _state_path(self) -> str:
+        return "data/bot_state.json"
+
+    def _load_state(self) -> None:
+        try:
+            data = json.loads(Path(self._state_path()).read_text())
+            self._consecutive_losses = int(data.get("consecutive_losses", 0))
+            self._post_loss_reduction = Decimal(str(data.get("post_loss_reduction", "1")))
+            loss_until = data.get("loss_streak_until", 0)
+            if loss_until > time.time():
+                self._loss_streak_until = loss_until
+            log.info("bot_state_loaded", consecutive_losses=self._consecutive_losses,
+                     post_loss_reduction=float(self._post_loss_reduction))
+        except (FileNotFoundError, json.JSONDecodeError, KeyError):
+            pass
+
+    def _save_state(self) -> None:
+        try:
+            Path("data").mkdir(parents=True, exist_ok=True)
+            state = {
+                "consecutive_losses": self._consecutive_losses,
+                "post_loss_reduction": float(self._post_loss_reduction),
+                "loss_streak_until": self._loss_streak_until,
+            }
+            # Merge with existing state to preserve PaperTrader's fields
+            existing = {}
+            try:
+                existing = json.loads(Path(self._state_path()).read_text())
+            except (FileNotFoundError, json.JSONDecodeError):
+                pass
+            existing.update(state)
+            Path(self._state_path()).write_text(json.dumps(existing, indent=2))
+        except Exception as exc:
+            log.warning("bot_state_save_failed", error=str(exc))
 
     # ── circuit breakers ────────────────────────────────────────
 
@@ -226,6 +266,9 @@ class CryptoBot:
                         if self._consecutive_losses >= self._cfg.crypto_5m.max_consecutive_losses:
                             self._loss_streak_until = time.time() + self._cfg.crypto_5m.loss_cooldown_seconds
                             log.warning(f"  loss streak {self._consecutive_losses}, cooldown {self._cfg.crypto_5m.loss_cooldown_seconds}s")
+
+                if new_count > prev_count:
+                    self._save_state()
 
                 # Re-evaluate breakers immediately after processing resolutions
                 # (not just once per 5-minute round loop in run()) and latch the
