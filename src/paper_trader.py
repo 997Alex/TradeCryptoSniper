@@ -108,6 +108,13 @@ class PaperTrader:
             if not pos.resolved
         )
 
+    @property
+    def open_exposure_cents(self) -> Decimal:
+        return sum(
+            pos.cost_cents for pos in self._open_positions.values()
+            if not pos.resolved
+        )
+
     async def execute_fok(
         self,
         token_id: str,

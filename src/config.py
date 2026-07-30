@@ -54,15 +54,11 @@ class Crypto5mConfig(BaseModel):
     enabled: bool = True
     execute_at_seconds: int = 20
     monitor_start_seconds: int = 60
-    early_price_cents: int = 92
-    final_price_cents: int = 78
-    early_entry_price_cents: int = 95
     poll_interval_seconds: float = 0.5
-    risk_per_trade_pct: float = 10.0
-    max_bet_usd_cap: float = 6.0
-    fixed_bet_usd: int = 2
-    kelly_fraction: float = 0.25
-    min_data_trades: int = 5
+    max_bet_usd_cap: float = 10.0
+    fixed_bet_usd: int = 3
+    min_bet_usd: int = 2
+    min_data_trades: int = 3
     default_win_rate: float = 0.60
     loss_size_multiplier: float = 0.50
     win_streak_restore: int = 3
@@ -75,7 +71,16 @@ class Crypto5mConfig(BaseModel):
     min_liquidity_usd_entry: float = 200.0
     liquidity_weight: float = 0.3
 
-    # ── added: cross-round / correlation risk controls ──────────
+    # ── entry gate parameters ───────────────────────────────────
+    # Dynamic entry threshold based on observed win rate per price bucket.
+    # The bot enters only when:
+    #   price_cents + safety_margin_cents < win_rate * 100
+    # Hard bounds prevent entry outside the historical sweet spot.
+    safety_margin_cents: int = 5
+    entry_price_cents_high: int = 95
+    entry_price_cents_low: int = 88
+
+    # ── cross-round / correlation risk controls ─────────────────
     # Hard cap on TOTAL unresolved cost basis (all open positions, all rounds
     # combined) as a % of equity. This is what actually bounds the worst-case
     # single-shot loss from a correlated multi-coin move -- max_exposure_per_round_pct

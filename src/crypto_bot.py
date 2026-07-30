@@ -275,15 +275,14 @@ class CryptoBot:
 
         label = _window_label(window_ts)
         end_label = _window_label(end_ts)
-        risk_pct = c.risk_per_trade_pct
         log.info(
             f"{SEP}\n"
             f"  ROUND {self._round}  |  {label} → {end_label}  |  "
             f"equity: ${self._paper.equity_cents / Decimal('100'):.2f}  |  "
             f"cash: ${self._paper.balance_usd:.2f}  |  "
             f"open_exposure: ${self._paper.open_exposure_cents / Decimal('100'):.2f}  |  "
-            f"risk: {risk_pct:.0f}%  |  "
-            f"max_bet: ${self._paper.balance_usd * Decimal(str(risk_pct)) / Decimal('100'):.2f}\n"
+            f"exposure_pct: {c.max_exposure_per_round_pct:.0f}%  |  "
+            f"max_bet: ${float(c.max_bet_usd_cap):.0f}\n"
             f"  {SEP}"
         )
         delay = monitor_start - int(time.time())
@@ -300,7 +299,6 @@ class CryptoBot:
                 break
 
             remaining = end_ts - int(time.time())
-            threshold = self._threshold(remaining)
 
             fresh = await self._fetch_events(window_ts)
             if fresh:
@@ -328,7 +326,8 @@ class CryptoBot:
                 else:
                     continue
 
-                if price_cents < threshold:
+                max_entry = self._win_rate_max_entry(coin, price_cents, remaining)
+                if price_cents > max_entry or price_cents < c.entry_price_cents_low:
                     self._price_streak[coin] = 0
                     continue
 
@@ -376,7 +375,7 @@ class CryptoBot:
                 await asyncio.gather(*tasks)
 
             if remaining % 10 == 0 or remaining <= 10:
-                self._log_prices(events, threshold, remaining, entered_coins)
+                self._log_prices(events, remaining, entered_coins)
 
             await asyncio.sleep(c.poll_interval_seconds)
 
@@ -452,7 +451,8 @@ class CryptoBot:
         end_ts: int,
     ):
         remaining = end_ts - int(time.time())
-        threshold = self._threshold(remaining)
+        c = self._cfg.crypto_5m
+        threshold = c.entry_price_cents_low
 
         best_qualified_price = -1
         best_overall_price = -1
@@ -626,8 +626,9 @@ class CryptoBot:
         remaining_global_exposure_usd = (max_total_exposure_cents - open_exposure_cents) / Decimal("100")
         invest = min(invest, remaining_global_exposure_usd)
 
-        if invest < Decimal("1"):
-            invest = Decimal("1")
+        min_bet = Decimal(str(c.min_bet_usd))
+        if invest < min_bet:
+            invest = min_bet
 
         size = (invest / price_dec).quantize(Decimal("0.0001"))
 
@@ -679,12 +680,12 @@ class CryptoBot:
     def _log_prices(
         self,
         events: dict[str, dict[str, Any]],
-        threshold: int,
         remaining_s: int,
         entered_coins: set[str] | None = None,
     ):
         if entered_coins is None:
             entered_coins = set()
+        c = self._cfg.crypto_5m
         cells = []
         for coin in CRYPTO_COINS:
             marker = "●" if coin in entered_coins else " "
@@ -698,18 +699,28 @@ class CryptoBot:
             else:
                 y, n = prices
                 sent = "YES" if y > n else "NO"
-                cells.append(f"{coin.upper()}>Y{y} N{n}▶{sent}{marker}")
-        log.info("  " + "  ".join(cells) + f"  thr={threshold}¢  t-{remaining_s}s")
+                max_entry = self._win_rate_max_entry(coin, y if y > n else n, remaining_s)
+                cells.append(f"{coin.upper()}>Y{y} N{n}▶{sent}{marker}(mx{max_entry})")
+        log.info("  " + "  ".join(cells) + f"  low={c.entry_price_cents_low}¢  high={c.entry_price_cents_high}¢  t-{remaining_s}s")
 
     # ── helpers ─────────────────────────────────────────────────
 
-    def _threshold(self, remaining_s: int) -> int:
-        if remaining_s <= 3:
-            return 72
-        if remaining_s <= 75:
-            progress = (75 - remaining_s) / (75 - 3)
-            return int(80 - progress * 8)
-        return 80
+    def _win_rate_max_entry(self, coin: str, price_cents: int, remaining_s: int) -> int:
+        c = self._cfg.crypto_5m
+        wr = self._paper.bucket_win_rate(price_cents, default=c.default_win_rate)
+        breakeven = int(wr * 100)
+        if breakeven > 100:
+            breakeven = 100
+        max_entry = breakeven - c.safety_margin_cents
+        if remaining_s <= 10:
+            max_entry += 2
+        elif remaining_s <= 36:
+            max_entry += 1
+        if max_entry > c.entry_price_cents_high:
+            max_entry = c.entry_price_cents_high
+        if max_entry < c.entry_price_cents_low:
+            max_entry = c.entry_price_cents_low
+        return max_entry
 
     async def _fetch_events(
         self, window_ts: int
