@@ -32,32 +32,32 @@ paper_trading:
 
 crypto_5m:
   enabled: true
-  execute_at_seconds: 20
-  monitor_start_seconds: 90
+  execute_at_seconds: 25
+  monitor_start_seconds: 120
   poll_interval_seconds: 0.5
-  fixed_bet_usd: 3
-  min_bet_usd: 2
-  max_bet_usd_cap: 10
-  min_data_trades: 3
+  fixed_bet_usd: 5
+  min_bet_usd: 5
+  max_bet_usd_cap: 12
+  min_data_trades: 5
   default_win_rate: 0.60
   loss_size_multiplier: 0.50
   win_streak_restore: 3
-  max_daily_drawdown_pct: 12.0
+  max_daily_drawdown_pct: 15.0
   max_consecutive_losses: 3
   loss_cooldown_seconds: 3600
-  max_exposure_per_round_pct: 8.0
+  max_exposure_per_round_pct: 10.0
   min_resolve_buffer_seconds: 5
-  slippage_model_pct: 0.5
+  slippage_model_pct: 1.0
   min_liquidity_usd_entry: 200.0
   liquidity_weight: 0.3
   # ── entry gate parameters ──
-  safety_margin_cents: 2
-  entry_price_cents_high: 78
-  entry_price_cents_low: 72
+  safety_margin_cents: 5
+  entry_price_cents_high: 95
+  entry_price_cents_low: 88
   # ── cross-round / correlation controls ──
-  max_total_exposure_pct: 8.0
-  max_concurrent_open_positions: 3
-  min_net_edge_cents: 8
+  max_total_exposure_pct: 10.0
+  max_concurrent_open_positions: 4
+  min_net_edge_cents: 4
   gas_buffer_cents: 1
 
 scanner:
