@@ -32,8 +32,8 @@ paper_trading:
 
 crypto_5m:
   enabled: true
-  execute_at_seconds: 25
-  monitor_start_seconds: 120
+  execute_at_seconds: 20
+  monitor_start_seconds: 90
   poll_interval_seconds: 0.5
   fixed_bet_usd: 5
   min_bet_usd: 5
@@ -47,7 +47,7 @@ crypto_5m:
   loss_cooldown_seconds: 3600
   max_exposure_per_round_pct: 10.0
   min_resolve_buffer_seconds: 5
-  slippage_model_pct: 1.0
+  slippage_model_pct: 0.5
   min_liquidity_usd_entry: 200.0
   liquidity_weight: 0.3
   # ── entry gate parameters ──
@@ -84,4 +84,4 @@ alerts:
 
 logging:
   level: "INFO"
-  file: "logs/crypto_bot.log"
+  file: "logs/sniper.log"

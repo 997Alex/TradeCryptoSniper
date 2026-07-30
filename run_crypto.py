@@ -16,8 +16,7 @@ async def main():
     bot = CryptoBot(cfg)
 
     loop = asyncio.get_running_loop()
-    for sig in (signal.SIGINT, signal.SIGTERM):
-        loop.add_signal_handler(sig, bot.stop)
+    loop.add_signal_handler(signal.SIGINT, bot.stop)
 
     await bot.run()
 

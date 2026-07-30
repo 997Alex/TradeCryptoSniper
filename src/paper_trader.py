@@ -46,16 +46,22 @@ class PaperTrader:
         self._slippage_pct = Decimal(str(slippage_pct))
         self._lock = asyncio.Lock()
         self._stats_path = stats_path
+        self._state_path = str(Path(stats_path).parent / "bot_state.json")
 
-        initial = Decimal(str(cfg.initial_balance_usd)) * Decimal("100")
-        self._balance_cents: Decimal = initial.quantize(Decimal("1"), rounding=ROUND_DOWN)
-        self._initial_balance_cents: Decimal = self._balance_cents
         self._open_positions: dict[str, PaperPosition] = {}
         self._resolved_positions: list[PaperPosition] = []
         self._bucket_stats: dict[str, dict[str, int | Decimal]] = defaultdict(
             lambda: {"trades": 0, "wins": 0, "losses": 0, "total_pnl_cents": Decimal("0")}
         )
         self._load_stats()
+
+        loaded_balance = self._load_bot_state()
+        if loaded_balance is not None:
+            self._balance_cents = loaded_balance
+        else:
+            initial = Decimal(str(cfg.initial_balance_usd)) * Decimal("100")
+            self._balance_cents = initial.quantize(Decimal("1"), rounding=ROUND_DOWN)
+        self._initial_balance_cents: Decimal = self._balance_cents
 
     def _load_stats(self) -> None:
         try:
@@ -86,6 +92,30 @@ class PaperTrader:
         except Exception as exc:
             log.warning("stats_save_failed", error=str(exc))
 
+    def _save_bot_state(self) -> None:
+        try:
+            Path(self._state_path).parent.mkdir(parents=True, exist_ok=True)
+            new = {
+                "balance_cents": float(self._balance_cents),
+                "initial_balance_cents": float(self._initial_balance_cents),
+            }
+            existing = {}
+            try:
+                existing = json.loads(Path(self._state_path).read_text())
+            except (FileNotFoundError, json.JSONDecodeError):
+                pass
+            existing.update(new)
+            Path(self._state_path).write_text(json.dumps(existing, indent=2))
+        except Exception as exc:
+            log.warning("bot_state_save_failed", error=str(exc))
+
+    def _load_bot_state(self) -> Decimal | None:
+        try:
+            data = json.loads(Path(self._state_path).read_text())
+            return Decimal(str(data["balance_cents"]))
+        except (FileNotFoundError, json.JSONDecodeError, KeyError):
+            return None
+
     @staticmethod
     def _price_bucket(price_cents: int) -> str:
         for (lo, hi), label in zip(PRICE_BUCKETS, BUCKET_LABELS):
@@ -104,6 +134,13 @@ class PaperTrader:
     @property
     def equity_cents(self) -> Decimal:
         return self._balance_cents + sum(
+            pos.cost_cents for pos in self._open_positions.values()
+            if not pos.resolved
+        )
+
+    @property
+    def open_exposure_cents(self) -> Decimal:
+        return sum(
             pos.cost_cents for pos in self._open_positions.values()
             if not pos.resolved
         )
@@ -213,7 +250,7 @@ class PaperTrader:
             self._resolved_positions.append(pos)
             del self._open_positions[token_id]
         self._save_stats()
-        self._log_portfolio()
+        self._save_bot_state()
 
     async def check_resolutions(self):
         if not self._open_positions:
@@ -233,9 +270,6 @@ class PaperTrader:
             except Exception as exc:
                 log.warning("resolution_check_failed", token_id=token_id, error=str(exc))
             await asyncio.sleep(0.3)
-
-        if resolved_any:
-            self._log_portfolio()
 
     async def _fetch_resolution(self, token_id: str, market_id: str) -> bool | None:
         try:
