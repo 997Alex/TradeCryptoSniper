@@ -13,7 +13,7 @@ import httpx
 
 from src.order_executor import OrderResult
 from src.config import PaperTradingConfig
-from utils.helpers import now_ts
+from utils.helpers import atomic_write_text, now_ts
 from utils.logger import get_logger
 
 log = get_logger("paper")
@@ -87,14 +87,12 @@ class PaperTrader:
                     "total_pnl_cents": float(data["total_pnl_cents"]),
                 }
         try:
-            Path(self._stats_path).parent.mkdir(parents=True, exist_ok=True)
-            Path(self._stats_path).write_text(json.dumps(raw, indent=2))
+            atomic_write_text(self._stats_path, json.dumps(raw, indent=2))
         except Exception as exc:
             log.warning("stats_save_failed", error=str(exc))
 
     def _save_bot_state(self) -> None:
         try:
-            Path(self._state_path).parent.mkdir(parents=True, exist_ok=True)
             new = {
                 "balance_cents": float(self._balance_cents),
                 "initial_balance_cents": float(self._initial_balance_cents),
@@ -105,7 +103,7 @@ class PaperTrader:
             except (FileNotFoundError, json.JSONDecodeError):
                 pass
             existing.update(new)
-            Path(self._state_path).write_text(json.dumps(existing, indent=2))
+            atomic_write_text(self._state_path, json.dumps(existing, indent=2))
         except Exception as exc:
             log.warning("bot_state_save_failed", error=str(exc))
 
@@ -220,6 +218,34 @@ class PaperTrader:
             trade_id=f"paper_{token_id}_{now_ts()}",
         )
 
+    async def book_fill(
+        self,
+        token_id: str,
+        side: str,
+        size: Decimal,
+        fill_price: Decimal,
+        market: dict | None = None,
+    ) -> None:
+        """Record a REAL fill in this ledger so resolution monitoring, bucket stats
+        and the exposure caps keep working unchanged in live mode.
+
+        The only difference from `_paper_execute` is where the price and size come
+        from: the venue's own response rather than the slippage model.
+        """
+        price_cents = (fill_price * Decimal("100")).quantize(Decimal("1"), rounding=ROUND_DOWN)
+        cost_cents = (price_cents * size).quantize(Decimal("1"), rounding=ROUND_DOWN)
+        async with self._lock:
+            self._balance_cents -= cost_cents
+            self._open_positions[token_id] = PaperPosition(
+                market_id=str((market or {}).get("id", "?")),
+                token_id=token_id,
+                question=(market or {}).get("question") or (market or {}).get("title", "?"),
+                side=side,
+                size=size,
+                entry_price_cents=price_cents,
+                cost_cents=cost_cents,
+            )
+
     async def resolve_position(self, token_id: str, won: bool):
         async with self._lock:
             pos = self._open_positions.get(token_id)
@@ -273,7 +299,12 @@ class PaperTrader:
 
     async def _fetch_resolution(self, token_id: str, market_id: str) -> bool | None:
         try:
-            resp = await self._http.get(f"/markets/{market_id}", timeout=10)
+            # `_` defeats the Cloudflare edge cache -- /markets/{id} is served with
+            # `cache-control: public, max-age=300` too, so without it a resolution
+            # can go unseen for up to 5 minutes after the market actually closes.
+            resp = await self._http.get(
+                f"/markets/{market_id}", params={"_": time.time_ns()}, timeout=10
+            )
             if resp.status_code != 200:
                 log.warning("fetch_resolution_http_error", market_id=market_id, status=resp.status_code)
                 return None

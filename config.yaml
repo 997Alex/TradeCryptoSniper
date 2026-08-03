@@ -26,7 +26,9 @@ trading:
 
 paper_trading:
   enabled: true
-  initial_balance_usd: 100
+  # Matches the live bankroll (on-chain collateral), so the percentage exposure
+  # caps produce the same ~4 concurrent positions in paper as they would live.
+  initial_balance_usd: 228
   resolve_check_interval_sec: 60
   max_concurrent_trades: 10
 
@@ -68,7 +70,9 @@ scanner:
 
 kill_switch:
   enabled: true
-  lock_file_path: "/tmp/crypto_bot_kill.lock"
+  # Not /tmp: that is tmpfs and cleanable, so a kill file could silently vanish
+  # and un-kill a stopped bot. Keep it beside the code.
+  lock_file_path: "/home/ubuntu/projects/TradeCryptoSniper/KILL"
   check_interval_sec: 5
 
 websocket:

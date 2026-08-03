@@ -11,7 +11,10 @@ from typing import Any
 import httpx
 
 from src.paper_trader import PaperTrader
+from src.arming import check_arming
+from src.live_executor import build_executor
 from src.config import Config, PaperTradingConfig
+from utils.helpers import atomic_write_text
 from utils.logger import get_logger
 
 log = get_logger("crypto_bot")
@@ -34,7 +37,7 @@ def _window_label(ts: int) -> str:
 
 
 class CryptoBot:
-    def __init__(self, cfg: Config):
+    def __init__(self, cfg: Config, mode: str = "paper", arm_flag: bool = False):
         self._cfg = cfg
         self._gamma_base = cfg.polymarket.gamma_api_base.rstrip("/")
         self._round = 0
@@ -50,6 +53,22 @@ class CryptoBot:
             resolve_check_interval_sec=5,
         )
         self._paper = PaperTrader(paper_cfg, self._gamma_base, slippage_pct=c5.slippage_model_pct, stats_path="data/bucket_stats.json")
+
+        # Execution backend. Disarmed, `self._exec is self._paper` -- the call at
+        # _open_position is then the identical bound method on the identical
+        # object, so paper behaviour is provably unchanged by the live path.
+        self._exec = self._paper
+        arm = check_arming(mode=mode, arm=arm_flag)
+        if arm.live:
+            executor, why = build_executor(self._paper)
+            if executor is None:
+                # Gate 6 refuses rather than downgrading. Paper writes the same
+                # stats, the same state file and the same "filled" log lines, so
+                # a silent fall-back here would be indistinguishable from a real
+                # run once the operator has cleared every deliberate gate.
+                raise SystemExit(f"REFUSING TO RUN ARMED -- {why}")
+            self._exec = executor
+        log.info("execution_mode", mode=str(arm))
 
         self._running = False
         self._last_window_ts: int | None = None
@@ -174,7 +193,6 @@ class CryptoBot:
 
     def _save_state(self) -> None:
         try:
-            Path("data").mkdir(parents=True, exist_ok=True)
             state = {
                 "consecutive_losses": self._consecutive_losses,
                 "post_loss_reduction": float(self._post_loss_reduction),
@@ -187,7 +205,7 @@ class CryptoBot:
             except (FileNotFoundError, json.JSONDecodeError):
                 pass
             existing.update(state)
-            Path(self._state_path()).write_text(json.dumps(existing, indent=2))
+            atomic_write_text(self._state_path(), json.dumps(existing, indent=2))
         except Exception as exc:
             log.warning("bot_state_save_failed", error=str(exc))
 
@@ -676,7 +694,7 @@ class CryptoBot:
         size = (invest / price_dec).quantize(Decimal("0.0001"))
 
         slippage = self._slippage_pct(liquidity, remaining_s)
-        result = await self._paper.execute_fok(
+        result = await self._exec.execute_fok(
             token_id=token_id, side=side, size=size, price=price_dec, market=market, slippage_pct=slippage
         )
 
@@ -771,8 +789,13 @@ class CryptoBot:
         async def _fetch_one(coin: str) -> tuple[str, dict[str, Any] | None]:
             slug = f"{coin}-updown-5m-{window_ts}"
             try:
-                resp = await self._http.get("/events", params={"slug": slug})
+                # `_` defeats the Cloudflare edge cache. Gamma serves /events with
+                # `cache-control: public, max-age=300` -- a 300s TTL on a 300s market --
+                # so without a varying param every poll in a window returns the same
+                # frozen start-of-window snapshot (measured: byte-identical for 115s).
+                resp = await self._http.get("/events", params={"slug": slug, "_": time.time_ns()})
                 if resp.status_code != 200:
+                    log.warning("fetch_non_200", coin=coin, status=resp.status_code)
                     return coin, None
                 data = resp.json()
                 if not data:
