@@ -24,7 +24,8 @@ e incassa $1.00 per share se vince, $0 se perde.
 7. [Operatività quotidiana](#operatività-quotidiana)
 8. [Modalità live (armamento)](#modalità-live-armamento)
 9. [Configurazione completa](#configurazione-completa)
-10. [Risultati misurati e limiti](#risultati-misurati-e-limiti)
+10. [Strumenti di analisi](#strumenti-di-analisi)
+11. [Risultati misurati e limiti](#risultati-misurati-e-limiti)
 
 ---
 
@@ -232,9 +233,11 @@ TradeCryptoSniper/
 │   ├── order_executor.py            # DTO OrderResult
 │   ├── arming.py                    # i 5 cancelli fra il bot e un ordine reale
 │   └── live_executor.py             # esecuzione reale via py-clob-client-v2
-└── utils/
-    ├── logger.py                    # structlog su file + stdout
-    └── helpers.py                   # load_env, atomic_write_text
+├── utils/
+│   ├── logger.py                    # structlog su file + stdout
+│   └── helpers.py                   # load_env, atomic_write_text
+└── tools/
+    └── approach.py                  # analisi offline dei log (non usato dal bot)
 ```
 
 I file `bot.py`, `main.py`, `clob_api.py`, `market_scanner.py`, `notifier.py`, `price_monitor.py`,
@@ -541,6 +544,53 @@ Impostare a `0` una qualsiasi delle guardie ripristina il comportamento original
 
 ---
 
+## Strumenti di analisi
+
+### `tools/approach.py`
+
+Ricostruisce ogni trade dai log e mette alla prova un filtro d'ingresso contro lo storico reale.
+Non tocca né il bot né il suo stato: legge solo `logs/*.log`, quindi può girare anche a bot acceso.
+
+```bash
+python3 tools/approach.py                  # solo il run corrente
+python3 tools/approach.py logs/*.log       # anche i run archiviati
+```
+
+Produce tre blocchi:
+
+1. **Forma di avvicinamento** — come il prezzo del lato comprato è arrivato in banda: salendo,
+   scendendo, o fermo. Poi quanto sarebbe costato, in volume e in PnL, un filtro su quella forma.
+2. **Drawdown post-ingresso** — la quotazione minima del lato detenuto finché restavano ≥15 s, e il
+   PnL controfattuale di uno stop-loss a varie soglie. **Ipotetico**: nel bot non esiste alcuna
+   uscita anticipata, e la quotazione è un mid, non un bid.
+3. **Totali** — W/L, win rate e intervallo di Wilson al 95%.
+
+### Due trappole nei dati, entrambe già gestite dallo script
+
+Chi riscrive questa analisi da zero ci cade quasi sempre. Sono documentate nel codice:
+
+- **Non tutte le risoluzioni scrivono una riga `✓`/`✗`.** Due percorsi di codice chiudono una
+  posizione e solo `_resolution_monitor` logga. Appaiare i risultati agli ingressi in ordine FIFO per
+  `(coin, side)` è quindi **sbagliato**: una riga mancante sposta di uno tutti gli esiti successivi
+  di quella coin. Lo script àncora invece ogni risultato alla **finestra** di 5 minuti in cui la
+  posizione è stata aperta, e se più di un ingresso risulta compatibile **rifiuta di scegliere**,
+  lasciando `UNKNOWN`: tirare a indovinare è esattamente ciò che produce l'errore. La latenza di
+  risoluzione osservata è 82–263 s, ma nulla nel bot la limita, quindi la finestra di accettazione
+  resta larga (900 s) e l'ambiguità viene gestita anziché ignorata.
+  `data/bucket_stats.json` resta la fonte autorevole per i conteggi aggregati; le righe di log ne
+  sono un sottoinsieme, e lo scarto è riportato come `unresolved/unlogged`.
+- **I campioni di prezzo vanno delimitati alla finestra.** Uno scan non delimitato dopo l'ingresso
+  prosegue nel round successivo, dove la stessa `(coin, side)` è un mercato diverso e quota
+  regolarmente 0¢: senza il limite ogni posizione sembra scesa a zero.
+
+### L'intervallo di confidenza va calcolato con Wilson
+
+Con win rate vicini al 100% l'approssimazione normale collassa e mente. A W27/L1 dichiarava
+`[90%, 100%]` — sopra il breakeven — mentre il limite inferiore reale era **82.3%**. Lo script usa
+Wilson. **Il numero che decide il go-live è il limite inferiore, non la stima puntuale.**
+
+---
+
 ## Risultati misurati e limiti
 
 ### L'aritmetica del pareggio
@@ -562,6 +612,110 @@ non sul win rate.
 | markup medio di slippage | +1.9¢ | +0.9¢ |
 | fill sopra 88¢ | 6 su 9 | **0 su 8** |
 | bucket `90-94¢` | 6 trade, **−$8.24** | vuoto |
+
+### Sessione paper del 2026-08-03 (snapshot alle 15:51 CEST)
+
+Bankroll iniziale $228, bet fissa $5, config `config_conservativa_100wr.yaml`.
+
+| | valore |
+|---|---|
+| round (finestre elaborate) | 68 |
+| finestre con almeno un ingresso | 37 (**54%**; il bot passa sul 46% delle finestre) |
+| ingressi | 45 |
+| risolti | 41 |
+| record | **W38 / L3** |
+| win rate | **92.7%**, Wilson 95% **[80.6%, 97.5%]** |
+| PnL | **+$13.44** (cassa $241.44) |
+| interventi del circuit breaker | **0** |
+| riavvii | **1**, alle 10:56:41 |
+
+⚠️ **Il riavvio va contato.** Il processo è partito alle 10:11:41, è stato fermato alle 10:56:17 e
+ripartito alle 10:56:41, **scartando 1 posizione aperta** (`paper_open_positions_dropped count=1`,
+un ETH YES 87¢ che non si è mai risolto e non compare in nessuna statistica). Lo span 10:11→15:51
+è quindi di 5h 39m ma **non è continuo**; il processo corrente ha 4h 54m di uptime ininterrotto.
+
+`systemctl show -p NRestarts` riporta **0** e non contraddice quanto sopra: conta solo i riavvii
+*automatici* decisi da systemd dopo un fallimento, non un `systemctl restart` manuale. Per l'uptime
+reale usare `ActiveEnterTimestamp`, o le righe `crypto_bot_started` nel log. Un monitor che riporta
+solo `NRestarts` dichiara "0 riavvii" attraverso un riavvio manuale che ha perso una posizione.
+
+Il PnL è positivo e il win rate è sopra il breakeven, ma **il limite inferiore a 80.6% è ancora sotto
+il breakeven di ~89%**: con 3 sconfitte l'intervallo contiene ancora scenari in perdita. Non è un
+risultato, è un campione ancora troppo piccolo.
+
+### Nessun ulteriore filtro d'ingresso è giustificato dai dati
+
+Dopo la terza sconfitta sono state cercate sistematicamente altre guardie d'ingresso: cinque ipotesi
+indipendenti (accordo fra le coin, volatilità del percorso pre-ingresso, comportamento del cancello
+win-rate ai confini dei bucket, orario d'ingresso, coerenza delle quotazioni `Y+N`), ognuna misurata
+in volume e PnL e poi sottoposta a confutazione avversariale. **Nessuna è sopravvissuta.** Ognuna
+bloccava fra il 20% e il 57% del volume, oppure invertiva di segno passando da un log all'altro,
+oppure cambiava segno togliendo una sola sconfitta dal campione.
+
+Le due sconfitte più istruttive hanno forme **opposte**:
+
+| | ingresso | percorso | esito |
+|---|---|---|---|
+| DOGE NO 86¢ (14:08) | in banda **scendendo** da 91¢ | 86 → 67 → 54 → 11¢ | persa |
+| BTC YES 85¢ (14:29) | in banda **salendo** da 71¢ | 85 → 85 → 85 → 55¢ | persa |
+
+Qualunque filtro sulla direzione di avvicinamento ne avrebbe bloccata una e lasciata passare
+l'altra. Il percorso pre-ingresso del DOGE era `91-91`: escursione zero, zero cambi di direzione,
+la lettura **più tranquilla** dell'intero dataset. All'ingresso è indistinguibile da 21 trade vinti.
+
+**L'aritmetica della potenza statistica è il vero vincolo.** Con un tasso di sconfitta base del 12%
+e un sottogruppo che copra un quarto dei trade:
+
+| effetto reale | n=44 | n=200 | n=400 | n=800 |
+|---|---|---|---|---|
+| tasso di perdita ×2 | 0.11 | 0.46 | 0.74 | 0.95 |
+| tasso di perdita ×3 | 0.23 | 0.83 | 0.98 | 1.00 |
+
+A n=44 la potenza è dell'11–23% proprio per gli effetti che si vogliono misurare: quasi nove effetti
+reali su dieci resterebbero invisibili, e a quella potenza un risultato "significativo" è più
+probabilmente rumore che segnale. **Servono ~400–800 trade risolti** (≈2–4 giorni di esercizio
+continuo) prima che queste ipotesi possano essere verificate anziché interpolate. Fino ad allora la
+mossa corretta è raccogliere dati, non filtrare: un quinto filtro tarato su 3 sconfitte ridurrebbe
+il throughput e degraderebbe proprio la raccolta che potrà rispondere alla domanda.
+
+### Il sizing non può sostituire il segnale
+
+Il rapporto di payoff è **invariante di scala**: una bet da $2.50 a 86¢ vince ~$0.39 e perde ~$2.56,
+lo stesso 6.7:1 e lo stesso breakeven del 13.1% sul tasso di sconfitta. Ridurre la size su un
+sottoinsieme "sospetto" migliora il valore atteso solo se quel flag marca davvero un win rate
+inferiore — l'unica cosa che i dati non riescono a dimostrare. Compra tranquillità, non edge.
+
+⚠️ **Trappola meccanica.** `fixed_bet_usd: 5` e `min_bet_usd: 5` sono uguali, quindi oggi **tre
+moltiplicatori sono inerti**: `COIN_LIQUIDITY_RANK` (BTC 1.0 … DOGE 0.4), `loss_size_multiplier: 0.50`
+e lo smorzatore di correlazione `1/(1+posizioni_aperte)`. Abbassare `min_bet_usd` per far mordere una
+regola di sizing li accenderebbe **tutti e tre insieme**: un ingresso su DOGE con tre posizioni
+aperte diventerebbe `5 × 0.4 × 0.25 = $0.50`, arrotondato a `$1` — un taglio dell'80% su gran parte
+del book, non la modifica mirata che si intendeva. L'ordine in `_open_position` è
+`fixed_bet → max_bet_usd_cap → liquidity_factor → post_loss_reduction → correlazione →
+arrotondamento → cap di esposizione → floor min_bet_usd`: il floor è **l'ultimo**, e per questo oggi
+sovrascrive tutto il resto. Un moltiplicatore mirato va quindi applicato **dopo** il floor, con una
+chiave propria che vale 1.0 di default.
+
+### L'unica direzione non ancora confutata (e perché non è pronta)
+
+Tutti i filtri sopra agiscono all'ingresso. La perdita però si realizza **dopo**, e i log contengono
+già il percorso post-ingresso. Uno stop-loss — uscire se il lato detenuto scende sotto X con ≥15 s
+residui — **non blocca alcun ingresso**, quindi non riduce il volume. Misurato con
+`tools/approach.py` su 37 trade risolti del run corrente:
+
+| soglia | scatta su | sconfitte intercettate | PnL (slippage 0¢ → 10¢) |
+|---|---|---|---|
+| 70¢ | 2/38 | 2 di 3 | +$11.62 → **+$15.33 … +$14.40** |
+| 75¢ | 3/38 | 2 di 3 (e 1 vincente) | +$11.62 → +$13.69 … +$12.17 |
+| 80¢ | 7/38 | 2 di 3 (e 5 vincenti) | +$11.62 → +$9.10 … +$5.24 |
+
+**Non è raccomandato**, per tre motivi concreti. Intercetta 2 sconfitte su 3: il BTC del 14:29 non è
+mai sceso sotto 85¢ finché restavano 15 s — è collassato a 55¢ **dentro** gli ultimi 15 s, e uno stop
+lo avrebbe mancato. La quotazione è un **mid, non un bid**: tutto il guadagno sta dentro un'ipotesi
+di esecuzione non misurata, e a 80¢ la regola perde denaro. E non è una chiave di config:
+`resolve_position()` è binaria vinta/persa, non esiste una chiusura intermedia né nel ledger paper né
+nell'executor live, e un trade uscito anticipatamente non ha etichetta W/L — corromperebbe proprio
+le `bucket_stats` che alimentano il cancello d'ingresso. Va rimisurato a 400 trade, offline, dai log.
 
 ### Onestà statistica
 
