@@ -80,6 +80,29 @@ class Crypto5mConfig(BaseModel):
     entry_price_cents_high: int = 95
     entry_price_cents_low: int = 88
 
+    # ── safety mechanisms ──
+    # All three are additive guards on top of the original entry rules. Set any
+    # of them to 0 to disable that guard and restore the original behaviour.
+    #   max_effective_entry_cents: reject if the SLIPPED price (what the ledger
+    #     will actually book) exceeds this. The original code checked only the
+    #     quoted price, so an 88c decision could be filled at 93c.
+    #   max_price_jump_cents: reject if the price leapt more than this since the
+    #     previous DISTINCT observation, i.e. it spiked into the band instead of
+    #     settling there. Also rejects a mid-window flip of the favoured side.
+    #   min_entry_seconds_left: no new entries inside this many seconds of
+    #     resolution, where the ~15s feed refresh can leave the quote older than
+    #     the time remaining.
+    #   price_settle_seconds: how long a price must hold unchanged before the
+    #     jump guard treats it as settled and lets it become its own baseline.
+    #     Without this the guard latches -- a settled price emits no new distinct
+    #     sample, so the comparison stays pinned to the pre-jump value and the
+    #     coin stays blocked for the whole window. Should exceed one origin
+    #     refresh (~15s) so the price must survive a real refresh at that level.
+    max_effective_entry_cents: int = 0
+    max_price_jump_cents: int = 0
+    min_entry_seconds_left: int = 0
+    price_settle_seconds: int = 0
+
     # ── cross-round / correlation risk controls ─────────────────
     # Hard cap on TOTAL unresolved cost basis (all open positions, all rounds
     # combined) as a % of equity. This is what actually bounds the worst-case

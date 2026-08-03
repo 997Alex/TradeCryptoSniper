@@ -82,6 +82,13 @@ class CryptoBot:
         self._position_cost_this_round: Decimal = Decimal("0")
         self._last_fetch_time: float = 0.0
         self._price_streak: dict[str, int] = {}
+        # Spike guard state: the latest distinct (side, price) observation per
+        # coin, and the one before it. Cleared each window alongside the streak.
+        self._last_distinct: dict[str, tuple[str, int, float]] = {}
+        self._prev_distinct: dict[str, tuple[str, int]] = {}
+        # last guard-rejection message per coin, so a rejection logs once
+        # per distinct reason instead of once per 0.5s poll
+        self._last_block_log: dict[str, str] = {}
         self._circuit_breaker_reason: str | None = None
         self._resolved_count: int = 0
         self._last_resolve_log: dict[str, Any] = {}
@@ -353,6 +360,9 @@ class CryptoBot:
 
         entered_coins: set[str] = set()
         self._price_streak.clear()
+        self._last_distinct.clear()
+        self._prev_distinct.clear()
+        self._last_block_log.clear()
 
         while (end_ts - int(time.time())) > 3:
             if self._halt_new_entries:
@@ -364,6 +374,25 @@ class CryptoBot:
             fresh = await self._fetch_events(window_ts)
             if fresh:
                 events.update(fresh)
+
+            # ── SAFETY 3: no entries inside the final N seconds ──
+            # The Gamma origin only refreshes outcomePrices every ~15s, so inside
+            # that window the quote can be OLDER than the time left to resolution
+            # -- the bot would be acting on information that expired before the
+            # position does. This also removes the 2x/3x time multiplier from the
+            # slippage model, which is what turned an 88c decision into a 93c fill.
+            # Set min_entry_seconds_left: 0 to restore the original behaviour.
+            if c.min_entry_seconds_left and remaining < c.min_entry_seconds_left:
+                if remaining % 5 == 0:
+                    log.info(f"  t-{remaining}s < {c.min_entry_seconds_left}s cutoff, no new entries this window")
+                # Keep the endgame price ticker. The `continue` below skips the
+                # _log_prices call at the bottom of the loop, which would delete
+                # telemetry for the final seconds of every window -- exactly the
+                # stretch the post-mortems need to reconstruct an approach.
+                if remaining % 10 == 0 or remaining <= 10:
+                    self._log_prices(events, remaining, entered_coins)
+                await asyncio.sleep(c.poll_interval_seconds)
+                continue
 
             new_entries = []
             for coin in CRYPTO_COINS:
@@ -387,10 +416,46 @@ class CryptoBot:
                 else:
                     continue
 
+                # ── SAFETY 2: spike guard ──
+                # Record only DISTINCT observations. The entry loop polls every
+                # 0.5s but the origin refreshes every ~15s, so ~30 consecutive
+                # samples are one observation repeated -- which is also why the
+                # streak>=3 filter cannot see a spike. Comparing against the
+                # previous *distinct* value is the only way to measure the jump.
+                now_s = time.time()
+                cur = self._last_distinct.get(coin)
+                if cur is None or cur[0] != side or cur[1] != price_cents:
+                    if cur is not None:
+                        self._prev_distinct[coin] = (cur[0], cur[1])
+                    self._last_distinct[coin] = (side, price_cents, now_s)
+                elif c.price_settle_seconds and (now_s - cur[2]) >= c.price_settle_seconds:
+                    # Held the same value through at least one full origin refresh,
+                    # so it SETTLED rather than spiked -- it becomes its own
+                    # baseline and the jump falls to 0. Without this the guard
+                    # latches: a settled price produces no new distinct sample, so
+                    # the comparison stays pinned to the pre-jump value forever and
+                    # the coin is dead for the rest of the window.
+                    self._prev_distinct[coin] = (side, price_cents)
+
                 max_entry = self._win_rate_max_entry(coin, price_cents, remaining)
                 if price_cents > max_entry or price_cents < c.entry_price_cents_low:
                     self._price_streak[coin] = 0
                     continue
+
+                if c.max_price_jump_cents:
+                    before = self._prev_distinct.get(coin)
+                    if before is not None:
+                        if before[0] != side:
+                            # The favoured side flipped inside the window. That is
+                            # the whipsaw itself, not an approach to a stable price.
+                            self._price_streak[coin] = 0
+                            self._log_block(coin, f"  {coin.upper()} {side} {price_cents}¢ blocked: side flipped from {before[0]}, skip")
+                            continue
+                        jump = price_cents - before[1]
+                        if jump > c.max_price_jump_cents:
+                            self._price_streak[coin] = 0
+                            self._log_block(coin, f"  {coin.upper()} {side} {price_cents}¢ blocked: leapt +{jump}¢ from {before[1]}¢ (max {c.max_price_jump_cents}¢), skip")
+                            continue
 
                 streak = self._price_streak.get(coin, 0) + 1
                 self._price_streak[coin] = streak
@@ -425,6 +490,25 @@ class CryptoBot:
                     if streak <= 3 or streak % 10 == 0:
                         log.info(f"  {coin.upper()} {side} {price_cents}¢ > max {max_price}¢ after costs, skip")
                     continue
+
+                # ── SAFETY 1: cap the price actually PAID, not the quote ──
+                # The filter above bounds the quoted price for a target net edge;
+                # nothing bounded what the fill would actually cost. The first
+                # loss of the run was approved at 88c and booked at 93c, where
+                # you risk 93c to win 7c. This mirrors PaperTrader._paper_execute's
+                # arithmetic exactly, so the number checked here IS the number the
+                # ledger will record. Set max_effective_entry_cents: 0 to disable.
+                if c.max_effective_entry_cents:
+                    eff = int(
+                        (Decimal(price_cents) / Decimal("100"))
+                        * (Decimal("1") + slippage / Decimal("100"))
+                        * Decimal("100")
+                    )
+                    if eff > c.max_effective_entry_cents:
+                        self._price_streak[coin] = 0
+                        self._log_block(coin, f"  {coin.upper()} {side} {price_cents}¢ blocked: would fill at {eff}¢ "
+                                              f"(slip {slippage}%, max {c.max_effective_entry_cents}¢), skip")
+                        continue
 
                 new_entries.append((coin, side, tid, price_cents, market))
                 entered_coins.add(coin)
@@ -765,6 +849,18 @@ class CryptoBot:
         log.info("  " + "  ".join(cells) + f"  low={c.entry_price_cents_low}¢  high={c.entry_price_cents_high}¢  t-{remaining_s}s")
 
     # ── helpers ─────────────────────────────────────────────────
+
+    def _log_block(self, coin: str, msg: str) -> None:
+        """Log a guard rejection once per distinct reason, not once per poll.
+
+        The origin refreshes every ~15s while the loop polls every 0.5s, so an
+        unthrottled rejection prints ~30 identical lines per observation -- one
+        blocked BTC entry produced 24. The pre-existing cost filter below is
+        throttled for the same reason.
+        """
+        if self._last_block_log.get(coin) != msg:
+            self._last_block_log[coin] = msg
+            log.info(msg)
 
     def _win_rate_max_entry(self, coin: str, price_cents: int, remaining_s: int) -> int:
         c = self._cfg.crypto_5m

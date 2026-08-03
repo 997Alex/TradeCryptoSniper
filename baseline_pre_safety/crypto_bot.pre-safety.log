@@ -1,0 +1,400 @@
+[2m2026-08-03 09:10:00[0m [[32m[1minfo     [0m] [1mstats_loaded                  [0m [36mbuckets[0m=[35m0[0m [36mpath[0m=[35mdata/bucket_stats.json[0m
+[2m2026-08-03 09:10:01[0m [[32m[1minfo     [0m] [1mexecution_mode                [0m [36mmode[0m=[35m'PAPER (refused by: mode_live, arm_flag, confirm)'[0m
+[2m2026-08-03 09:10:01[0m [[32m[1minfo     [0m] [1mcrypto_bot_started            [0m
+[2m2026-08-03 09:10:01[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 1  |  07:10 → 07:15  |  equity: $228.00  |  cash: $228.00  |  open_exposure: $0.00  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:10:01[0m [[32m[1minfo     [0m] [1m  waiting 209s until monitoring starts at 07:13[0m
+[2m2026-08-03 09:13:30[0m [[32m[1minfo     [0m] [1m  BTC>Y77 N22▶YES (mx88)  ETH>Y73 N26▶YES (mx88)  SOL>Y64 N35▶YES (mx88)  XRP>Y51 N48▶YES (mx88)  DOGE>Y45 N55▶NO (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:13:31[0m [[32m[1minfo     [0m] [1m  BTC>Y77 N22▶YES (mx88)  ETH>Y73 N26▶YES (mx88)  SOL>Y64 N35▶YES (mx88)  XRP>Y51 N48▶YES (mx88)  DOGE>Y45 N55▶NO (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:13:40[0m [[32m[1minfo     [0m] [1m  BTC>Y77 N22▶YES (mx88)  ETH>Y73 N26▶YES (mx88)  SOL>Y64 N35▶YES (mx88)  XRP>Y51 N48▶YES (mx88)  DOGE>Y45 N55▶NO (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:13:50[0m [[32m[1minfo     [0m] [1m  BTC>Y90 N9▶YES (mx88)  ETH>Y86 N13▶YES (mx88)  SOL>Y76 N23▶YES (mx88)  XRP>Y59 N41▶YES (mx88)  DOGE>Y47 N53▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:13:50[0m [[32m[1minfo     [0m] [1m  BTC>Y90 N9▶YES (mx88)  ETH>Y86 N13▶YES (mx88)  SOL>Y76 N23▶YES (mx88)  XRP>Y59 N41▶YES (mx88)  DOGE>Y47 N53▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:14:00[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y82 N17▶YES (mx88)  SOL>Y73 N26▶YES (mx88)  XRP>Y58 N41▶YES (mx88)  DOGE>Y45 N55▶NO (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:14:00[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y82 N17▶YES (mx88)  SOL>Y73 N26▶YES (mx88)  XRP>Y58 N41▶YES (mx88)  DOGE>Y45 N55▶NO (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:14:10[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y82 N17▶YES (mx88)  SOL>Y73 N26▶YES (mx88)  XRP>Y58 N41▶YES (mx88)  DOGE>Y45 N55▶NO (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:14:20[0m [[32m[1minfo     [0m] [1m  BTC>Y93 N6▶YES (mx88)  ETH>Y92 N7▶YES (mx88)  SOL>Y78 N21▶YES (mx88)  XRP>Y66 N34▶YES (mx88)  DOGE>Y55 N44▶YES (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:14:20[0m [[32m[1minfo     [0m] [1m  BTC>Y93 N6▶YES (mx88)  ETH>Y92 N7▶YES (mx88)  SOL>Y78 N21▶YES (mx88)  XRP>Y66 N34▶YES (mx88)  DOGE>Y55 N44▶YES (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:14:30[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y83 N16▶YES (mx88)  XRP>Y57 N43▶YES (mx88)  DOGE>Y58 N42▶YES (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:14:31[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y83 N16▶YES (mx88)  XRP>Y57 N43▶YES (mx88)  DOGE>Y58 N42▶YES (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:14:40[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y83 N16▶YES (mx88)  XRP>Y57 N43▶YES (mx88)  DOGE>Y58 N42▶YES (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:14:50[0m [[32m[1minfo     [0m] [1m  BTC>Y71 N28▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y75 N24▶YES (mx88)  XRP>Y22 N78▶NO (mx88)  DOGE>Y73 N27▶YES (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:14:51[0m [[32m[1minfo     [0m] [1m  BTC>Y71 N28▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y75 N24▶YES (mx88)  XRP>Y22 N78▶NO (mx88)  DOGE>Y73 N27▶YES (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:14:51[0m [[32m[1minfo     [0m] [1m  BTC>Y71 N28▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y75 N24▶YES (mx88)  XRP>Y22 N78▶NO (mx88)  DOGE>Y73 N27▶YES (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:14:52[0m [[32m[1minfo     [0m] [1m  BTC>Y71 N28▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y75 N24▶YES (mx88)  XRP>Y22 N78▶NO (mx88)  DOGE>Y73 N27▶YES (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:14:53[0m [[32m[1minfo     [0m] [1m  BTC>Y71 N28▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y75 N24▶YES (mx88)  XRP>Y22 N78▶NO (mx88)  DOGE>Y73 N27▶YES (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:14:53[0m [[32m[1minfo     [0m] [1m  BTC>Y99 N0▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y88 N11▶YES (mx88)  XRP>Y62 N37▶YES (mx88)  DOGE>Y80 N19▶YES (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:14:54[0m [[32m[1minfo     [0m] [1m  BTC>Y99 N0▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y88 N11▶YES (mx88)  XRP>Y62 N37▶YES (mx88)  DOGE>Y80 N19▶YES (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:14:54[0m [[32m[1minfo     [0m] [1m  ▶ ENTER SOL YES at 88¢ (streak=3)[0m
+[2m2026-08-03 09:14:54[0m [[32m[1minfo     [0m] [1m    filled SOL YES $5.00 @ 88¢ | equity=$228.00 | cash=$222.72[0m
+[2m2026-08-03 09:14:54[0m [[32m[1minfo     [0m] [1m  BTC>Y99 N0▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y88 N11▶YES●(mx88)  XRP>Y62 N37▶YES (mx88)  DOGE>Y80 N19▶YES (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:14:55[0m [[32m[1minfo     [0m] [1m  open positions: 1 | resolved: 0[0m
+[2m2026-08-03 09:14:55[0m [[32m[1minfo     [0m] [1m  BTC>Y99 N0▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y88 N11▶YES●(mx88)  XRP>Y62 N37▶YES (mx88)  DOGE>Y80 N19▶YES (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:14:55[0m [[32m[1minfo     [0m] [1m  BTC>Y99 N0▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y88 N11▶YES●(mx88)  XRP>Y62 N37▶YES (mx88)  DOGE>Y80 N19▶YES (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:14:56[0m [[32m[1minfo     [0m] [1m  BTC>Y99 N0▶YES (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y88 N11▶YES●(mx88)  XRP>Y62 N37▶YES (mx88)  DOGE>Y80 N19▶YES (mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:16:40[0m [[32m[1minfo     [0m] [1m--------------------------------------------------------------------[0m
+[2m2026-08-03 09:16:40[0m [[32m[1minfo     [0m] [1m  TRADES THIS ROUND (1):      [0m
+[2m2026-08-03 09:16:40[0m [[32m[1minfo     [0m] [1m   SOL  YES  entry=88¢  pending[0m
+[2m2026-08-03 09:16:40[0m [[32m[1minfo     [0m] [1m  ROUND 1 SUMMARY  |  equity: $228.00  |  cash: $222.72  |  open: 1  |  resolved: 0  |  wins: 0  |  losses: 0  |  WR: N/A  |  invested: $5.00
+====================================================================[0m
+[2m2026-08-03 09:16:41[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 2  |  07:15 → 07:20  |  equity: $228.00  |  cash: $222.72  |  open_exposure: $5.28  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:16:41[0m [[32m[1minfo     [0m] [1m  waiting 109s until monitoring starts at 07:18[0m
+[2m2026-08-03 09:17:00[0m [[32m[1minfo     [0m] [1m  ✗ Solana YES LOST | pnl=$-5.28 | equity=$222.72 | cash=$222.72[0m
+[2m2026-08-03 09:17:03[0m [[32m[1minfo     [0m] [1m  open positions: 0 | resolved: 1[0m
+[2m2026-08-03 09:18:30[0m [[32m[1minfo     [0m] [1m  BTC>Y58 N41▶YES (mx88)  ETH>Y5 N94▶NO (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y6 N94▶NO (mx88)  DOGE>Y22 N78▶NO (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:18:30[0m [[32m[1minfo     [0m] [1m  BTC>Y58 N41▶YES (mx88)  ETH>Y5 N94▶NO (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y6 N94▶NO (mx88)  DOGE>Y22 N78▶NO (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:18:40[0m [[32m[1minfo     [0m] [1m  BTC>Y58 N41▶YES (mx88)  ETH>Y5 N94▶NO (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y6 N94▶NO (mx88)  DOGE>Y22 N78▶NO (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:18:50[0m [[32m[1minfo     [0m] [1m  BTC>Y58 N41▶YES (mx88)  ETH>Y4 N95▶NO (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y4 N95▶NO (mx88)  DOGE>Y24 N76▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:18:50[0m [[32m[1minfo     [0m] [1m  BTC>Y58 N41▶YES (mx88)  ETH>Y4 N95▶NO (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y4 N95▶NO (mx88)  DOGE>Y24 N76▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:19:00[0m [[32m[1minfo     [0m] [1m  BTC>Y60 N39▶YES (mx88)  ETH>Y4 N95▶NO (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y4 N95▶NO (mx88)  DOGE>Y19 N81▶NO (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:19:10[0m [[32m[1minfo     [0m] [1m  BTC>Y60 N39▶YES (mx88)  ETH>Y4 N95▶NO (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y4 N95▶NO (mx88)  DOGE>Y19 N81▶NO (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:19:11[0m [[32m[1minfo     [0m] [1m  BTC>Y60 N39▶YES (mx88)  ETH>Y4 N95▶NO (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y4 N95▶NO (mx88)  DOGE>Y19 N81▶NO (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:19:20[0m [[32m[1minfo     [0m] [1m  BTC>Y86 N13▶YES (mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y13 N87▶NO (mx88)  XRP>Y2 N97▶NO (mx88)  DOGE>Y38 N61▶NO (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:19:20[0m [[32m[1minfo     [0m] [1m  BTC>Y86 N13▶YES (mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y13 N87▶NO (mx88)  XRP>Y2 N97▶NO (mx88)  DOGE>Y38 N61▶NO (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:19:30[0m [[32m[1minfo     [0m] [1m  BTC>Y76 N23▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y12 N87▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y21 N78▶NO (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:19:40[0m [[32m[1minfo     [0m] [1m  BTC>Y76 N23▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y12 N87▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y21 N78▶NO (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:19:50[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:19:50[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:19:51[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:19:52[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:19:52[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:19:53[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:19:54[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:19:54[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:19:55[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:19:55[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:19:56[0m [[32m[1minfo     [0m] [1m  BTC>Y89 N10▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y48 N52▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y52 N47▶YES (mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:19:57[0m [[32m[1minfo     [0m] [1m  BTC>Y92 N8▶YES (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y47 N53▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y84 N16▶YES (mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:20:00[0m [[32m[1minfo     [0m] [1m  no trades this round, continuing to next window[0m
+[2m2026-08-03 09:20:00[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 3  |  07:20 → 07:25  |  equity: $222.72  |  cash: $222.72  |  open_exposure: $0.00  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:20:00[0m [[32m[1minfo     [0m] [1m  waiting 210s until monitoring starts at 07:23[0m
+[2m2026-08-03 09:23:30[0m [[32m[1minfo     [0m] [1m  BTC>Y90 N9▶YES (mx88)  ETH>Y94 N5▶YES (mx88)  SOL>Y89 N10▶YES (mx88)  XRP>Y92 N7▶YES (mx88)  DOGE>Y86 N13▶YES (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:23:40[0m [[32m[1minfo     [0m] [1m  BTC>Y90 N9▶YES (mx88)  ETH>Y94 N5▶YES (mx88)  SOL>Y89 N10▶YES (mx88)  XRP>Y92 N7▶YES (mx88)  DOGE>Y86 N13▶YES (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:23:50[0m [[32m[1minfo     [0m] [1m  BTC>Y90 N9▶YES (mx88)  ETH>Y94 N5▶YES (mx88)  SOL>Y91 N8▶YES (mx88)  XRP>Y93 N6▶YES (mx88)  DOGE>Y95 N5▶YES (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:23:50[0m [[32m[1minfo     [0m] [1m  BTC>Y90 N9▶YES (mx88)  ETH>Y94 N5▶YES (mx88)  SOL>Y91 N8▶YES (mx88)  XRP>Y93 N6▶YES (mx88)  DOGE>Y95 N5▶YES (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:24:00[0m [[32m[1minfo     [0m] [1m  BTC>Y92 N7▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N2▶YES (mx88)  DOGE>Y97 N2▶YES (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:24:10[0m [[32m[1minfo     [0m] [1m  BTC>Y92 N7▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N2▶YES (mx88)  DOGE>Y97 N2▶YES (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:24:11[0m [[32m[1minfo     [0m] [1m  BTC>Y92 N7▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N2▶YES (mx88)  DOGE>Y97 N2▶YES (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:24:20[0m [[32m[1minfo     [0m] [1m  BTC>Y91 N8▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y92 N7▶YES (mx88)  XRP>Y98 N2▶YES (mx88)  DOGE>Y98 N1▶YES (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:24:20[0m [[32m[1minfo     [0m] [1m  BTC>Y91 N8▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y92 N7▶YES (mx88)  XRP>Y98 N2▶YES (mx88)  DOGE>Y98 N1▶YES (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:24:30[0m [[32m[1minfo     [0m] [1m  BTC>Y93 N6▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y97 N2▶YES (mx88)  XRP>Y99 N1▶YES (mx88)  DOGE>Y98 N1▶YES (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:24:30[0m [[32m[1minfo     [0m] [1m  BTC>Y93 N6▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y97 N2▶YES (mx88)  XRP>Y99 N1▶YES (mx88)  DOGE>Y98 N1▶YES (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:24:40[0m [[32m[1minfo     [0m] [1m  BTC>Y93 N6▶YES (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y97 N2▶YES (mx88)  XRP>Y99 N1▶YES (mx88)  DOGE>Y98 N1▶YES (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:24:50[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:24:51[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:24:51[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:24:52[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:24:53[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:24:53[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:24:54[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:24:54[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:24:55[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:24:56[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:24:56[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y98 N2▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N1▶YES (mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:25:00[0m [[32m[1minfo     [0m] [1m  no trades this round, continuing to next window[0m
+[2m2026-08-03 09:25:00[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 4  |  07:25 → 07:30  |  equity: $222.72  |  cash: $222.72  |  open_exposure: $0.00  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:25:00[0m [[32m[1minfo     [0m] [1m  waiting 210s until monitoring starts at 07:28[0m
+[2m2026-08-03 09:28:30[0m [[32m[1minfo     [0m] [1m  BTC>Y35 N64▶NO (mx88)  ETH>Y43 N56▶NO (mx88)  SOL>Y43 N56▶NO (mx88)  XRP>Y55 N45▶YES (mx88)  DOGE>Y66 N34▶YES (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:28:31[0m [[32m[1minfo     [0m] [1m  BTC>Y35 N64▶NO (mx88)  ETH>Y43 N56▶NO (mx88)  SOL>Y43 N56▶NO (mx88)  XRP>Y55 N45▶YES (mx88)  DOGE>Y66 N34▶YES (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:28:40[0m [[32m[1minfo     [0m] [1m  BTC>Y35 N64▶NO (mx88)  ETH>Y43 N56▶NO (mx88)  SOL>Y43 N56▶NO (mx88)  XRP>Y55 N45▶YES (mx88)  DOGE>Y66 N34▶YES (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:28:40[0m [[32m[1minfo     [0m] [1m  BTC>Y35 N64▶NO (mx88)  ETH>Y43 N56▶NO (mx88)  SOL>Y43 N56▶NO (mx88)  XRP>Y55 N45▶YES (mx88)  DOGE>Y66 N34▶YES (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:28:50[0m [[32m[1minfo     [0m] [1m  BTC>Y32 N67▶NO (mx88)  ETH>Y49 N50▶NO (mx88)  SOL>Y36 N63▶NO (mx88)  XRP>Y56 N44▶YES (mx88)  DOGE>Y67 N32▶YES (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:28:51[0m [[32m[1minfo     [0m] [1m  BTC>Y32 N67▶NO (mx88)  ETH>Y49 N50▶NO (mx88)  SOL>Y36 N63▶NO (mx88)  XRP>Y56 N44▶YES (mx88)  DOGE>Y67 N32▶YES (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:29:00[0m [[32m[1minfo     [0m] [1m  BTC>Y24 N75▶NO (mx88)  ETH>Y55 N44▶YES (mx88)  SOL>Y44 N56▶NO (mx88)  XRP>Y54 N45▶YES (mx88)  DOGE>Y73 N27▶YES (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:29:00[0m [[32m[1minfo     [0m] [1m  BTC>Y24 N75▶NO (mx88)  ETH>Y55 N44▶YES (mx88)  SOL>Y44 N56▶NO (mx88)  XRP>Y54 N45▶YES (mx88)  DOGE>Y73 N27▶YES (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:29:10[0m [[32m[1minfo     [0m] [1m  BTC>Y31 N68▶NO (mx88)  ETH>Y49 N50▶NO (mx88)  SOL>Y36 N63▶NO (mx88)  XRP>Y56 N44▶YES (mx88)  DOGE>Y69 N31▶YES (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:29:15[0m [[32m[1minfo     [0m] [1m  ▶ ENTER DOGE YES at 88¢ (streak=3)[0m
+[2m2026-08-03 09:29:15[0m [[32m[1minfo     [0m] [1m    filled DOGE YES $5.00 @ 88¢ | equity=$222.72 | cash=$217.67[0m
+[2m2026-08-03 09:29:15[0m [[32m[1minfo     [0m] [1m  open positions: 1 | resolved: 1[0m
+[2m2026-08-03 09:29:20[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y52 N47▶YES (mx88)  SOL>Y44 N55▶NO (mx88)  XRP>Y72 N27▶YES (mx88)  DOGE>Y88 N11▶YES●(mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:29:20[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y52 N47▶YES (mx88)  SOL>Y44 N55▶NO (mx88)  XRP>Y72 N27▶YES (mx88)  DOGE>Y88 N11▶YES●(mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:29:30[0m [[32m[1minfo     [0m] [1m  BTC>Y31 N68▶NO (mx88)  ETH>Y66 N33▶YES (mx88)  SOL>Y73 N26▶YES (mx88)  XRP>Y96 N4▶YES (mx88)  DOGE>Y94 N5▶YES●(mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:29:40[0m [[32m[1minfo     [0m] [1m  BTC>Y31 N68▶NO (mx88)  ETH>Y66 N33▶YES (mx88)  SOL>Y73 N26▶YES (mx88)  XRP>Y96 N4▶YES (mx88)  DOGE>Y94 N5▶YES●(mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:29:41[0m [[32m[1minfo     [0m] [1m  BTC>Y31 N68▶NO (mx88)  ETH>Y66 N33▶YES (mx88)  SOL>Y73 N26▶YES (mx88)  XRP>Y96 N4▶YES (mx88)  DOGE>Y94 N5▶YES●(mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:29:50[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:29:51[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:29:51[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:29:52[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:29:53[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:29:53[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:29:54[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:29:54[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:29:55[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:29:56[0m [[32m[1minfo     [0m] [1m  BTC>Y39 N60▶NO (mx88)  ETH>Y96 N3▶YES (mx88)  SOL>Y95 N4▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:29:56[0m [[32m[1minfo     [0m] [1m  BTC>Y10 N89▶NO (mx88)  ETH>Y74 N25▶YES (mx88)  SOL>Y90 N10▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N0▶YES●(mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:31:40[0m [[32m[1minfo     [0m] [1m--------------------------------------------------------------------[0m
+[2m2026-08-03 09:31:40[0m [[32m[1minfo     [0m] [1m  TRADES THIS ROUND (1):      [0m
+[2m2026-08-03 09:31:40[0m [[32m[1minfo     [0m] [1m  DOGE  YES  entry=88¢  pending[0m
+[2m2026-08-03 09:31:40[0m [[32m[1minfo     [0m] [1m  ROUND 4 SUMMARY  |  equity: $222.72  |  cash: $217.67  |  open: 1  |  resolved: 1  |  wins: 0  |  losses: 1  |  WR: 0/1  |  invested: $5.00
+====================================================================[0m
+[2m2026-08-03 09:31:41[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 5  |  07:30 → 07:35  |  equity: $222.72  |  cash: $217.67  |  open_exposure: $5.05  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:31:41[0m [[32m[1minfo     [0m] [1m  waiting 109s until monitoring starts at 07:33[0m
+[2m2026-08-03 09:32:44[0m [[32m[1minfo     [0m] [1m  ✓ Dogecoin YES WON | pnl=+$0.63 | equity=$223.35 | cash=$223.35[0m
+[2m2026-08-03 09:32:47[0m [[32m[1minfo     [0m] [1m  open positions: 0 | resolved: 2[0m
+[2m2026-08-03 09:33:30[0m [[32m[1minfo     [0m] [1m  BTC>Y85 N14▶YES (mx95)  ETH>Y88 N11▶YES (mx95)  SOL>Y92 N7▶YES (mx88)  XRP>Y91 N8▶YES (mx88)  DOGE>Y88 N11▶YES (mx95)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:33:30[0m [[32m[1minfo     [0m] [1m  BTC>Y85 N14▶YES (mx95)  ETH>Y88 N11▶YES (mx95)  SOL>Y92 N7▶YES (mx88)  XRP>Y91 N8▶YES (mx88)  DOGE>Y88 N11▶YES (mx95)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:33:31[0m [[32m[1minfo     [0m] [1m  ▶ ENTER ETH YES at 88¢ (streak=3)[0m
+[2m2026-08-03 09:33:31[0m [[32m[1minfo     [0m] [1m    filled ETH YES $5.00 @ 88¢ | equity=$223.35 | cash=$218.30[0m
+[2m2026-08-03 09:33:31[0m [[32m[1minfo     [0m] [1m  ▶ ENTER DOGE YES at 88¢ (streak=3)[0m
+[2m2026-08-03 09:33:31[0m [[32m[1minfo     [0m] [1m    filled DOGE YES $5.00 @ 88¢ | equity=$223.35 | cash=$213.19[0m
+[2m2026-08-03 09:33:32[0m [[32m[1minfo     [0m] [1m  open positions: 2 | resolved: 2[0m
+[2m2026-08-03 09:33:40[0m [[32m[1minfo     [0m] [1m  BTC>Y85 N14▶YES (mx95)  ETH>Y88 N11▶YES●(mx95)  SOL>Y92 N7▶YES (mx88)  XRP>Y91 N8▶YES (mx88)  DOGE>Y88 N11▶YES●(mx95)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:33:50[0m [[32m[1minfo     [0m] [1m  BTC>Y92 N7▶YES (mx88)  ETH>Y92 N7▶YES●(mx88)  SOL>Y93 N7▶YES (mx88)  XRP>Y92 N8▶YES (mx88)  DOGE>Y86 N13▶YES●(mx95)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:33:50[0m [[32m[1minfo     [0m] [1m  BTC>Y92 N7▶YES (mx88)  ETH>Y92 N7▶YES●(mx88)  SOL>Y93 N7▶YES (mx88)  XRP>Y92 N8▶YES (mx88)  DOGE>Y86 N13▶YES●(mx95)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:34:00[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y96 N3▶YES●(mx88)  SOL>Y96 N3▶YES (mx88)  XRP>Y98 N2▶YES (mx88)  DOGE>Y92 N7▶YES●(mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:34:01[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y96 N3▶YES●(mx88)  SOL>Y96 N3▶YES (mx88)  XRP>Y98 N2▶YES (mx88)  DOGE>Y92 N7▶YES●(mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:34:10[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y96 N3▶YES●(mx88)  SOL>Y96 N3▶YES (mx88)  XRP>Y98 N2▶YES (mx88)  DOGE>Y92 N7▶YES●(mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:34:10[0m [[32m[1minfo     [0m] [1m  BTC>Y96 N3▶YES (mx88)  ETH>Y96 N3▶YES●(mx88)  SOL>Y96 N3▶YES (mx88)  XRP>Y98 N2▶YES (mx88)  DOGE>Y92 N7▶YES●(mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:34:20[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y98 N1▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y96 N3▶YES (mx88)  DOGE>Y94 N5▶YES●(mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:34:30[0m [[32m[1minfo     [0m] [1m  BTC>Y99 N0▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y96 N4▶YES●(mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:34:30[0m [[32m[1minfo     [0m] [1m  BTC>Y99 N0▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y96 N4▶YES●(mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:34:40[0m [[32m[1minfo     [0m] [1m  BTC>Y99 N0▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y96 N4▶YES●(mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:34:50[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:34:50[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:34:51[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:34:52[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:34:52[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:34:53[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:34:53[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:34:54[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:34:55[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:34:55[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:34:56[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:34:56[0m [[32m[1minfo     [0m] [1m  BTC>Y98 N1▶YES (mx88)  ETH>Y99 N0▶YES●(mx88)  SOL>Y99 N0▶YES (mx88)  XRP>Y99 N0▶YES (mx88)  DOGE>Y98 N2▶YES●(mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:36:52[0m [[32m[1minfo     [0m] [1m--------------------------------------------------------------------[0m
+[2m2026-08-03 09:36:52[0m [[32m[1minfo     [0m] [1m  TRADES THIS ROUND (2):      [0m
+[2m2026-08-03 09:36:52[0m [[32m[1minfo     [0m] [1m   ETH  YES  entry=88¢  pending[0m
+[2m2026-08-03 09:36:52[0m [[32m[1minfo     [0m] [1m  DOGE  YES  entry=88¢  pending[0m
+[2m2026-08-03 09:36:52[0m [[32m[1minfo     [0m] [1m  ROUND 5 SUMMARY  |  equity: $223.35  |  cash: $213.19  |  open: 2  |  resolved: 2  |  wins: 1  |  losses: 1  |  WR: 1/2  |  invested: $10.00
+====================================================================[0m
+[2m2026-08-03 09:36:52[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 6  |  07:35 → 07:40  |  equity: $223.35  |  cash: $213.19  |  open_exposure: $10.16  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:36:52[0m [[32m[1minfo     [0m] [1m  waiting 98s until monitoring starts at 07:38[0m
+[2m2026-08-03 09:37:13[0m [[32m[1minfo     [0m] [1m  ✓ Ethereum YES WON | pnl=+$0.63 | equity=$223.98 | cash=$218.87[0m
+[2m2026-08-03 09:37:16[0m [[32m[1minfo     [0m] [1m  open positions: 1 | resolved: 3[0m
+[2m2026-08-03 09:38:30[0m [[32m[1minfo     [0m] [1m  BTC>Y1 N98▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y2 N98▶NO (mx88)  XRP>Y7 N93▶NO (mx88)  DOGE>Y6 N93▶NO (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:38:30[0m [[32m[1minfo     [0m] [1m  ✓ Dogecoin YES WON | pnl=+$0.57 | equity=$224.55 | cash=$224.55[0m
+[2m2026-08-03 09:38:33[0m [[32m[1minfo     [0m] [1m  open positions: 0 | resolved: 4[0m
+[2m2026-08-03 09:38:40[0m [[32m[1minfo     [0m] [1m  BTC>Y1 N98▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y2 N98▶NO (mx88)  XRP>Y7 N93▶NO (mx88)  DOGE>Y6 N93▶NO (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:38:40[0m [[32m[1minfo     [0m] [1m  BTC>Y1 N98▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y2 N98▶NO (mx88)  XRP>Y7 N93▶NO (mx88)  DOGE>Y6 N93▶NO (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:38:50[0m [[32m[1minfo     [0m] [1m  BTC>Y1 N98▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y5 N94▶NO (mx88)  DOGE>Y6 N93▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:39:00[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y5 N94▶NO (mx88)  DOGE>Y5 N94▶NO (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:39:00[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y5 N94▶NO (mx88)  DOGE>Y5 N94▶NO (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:39:10[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y5 N94▶NO (mx88)  DOGE>Y5 N94▶NO (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:39:20[0m [[32m[1minfo     [0m] [1m  BTC>Y1 N98▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y4 N95▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:39:21[0m [[32m[1minfo     [0m] [1m  BTC>Y1 N98▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y4 N95▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:39:30[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y2 N97▶NO (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:39:40[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y2 N97▶NO (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:39:40[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y2 N97▶NO (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:39:50[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:39:51[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:39:51[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:39:52[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:39:53[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:39:53[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:39:54[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:39:54[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:39:55[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:39:56[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:39:56[0m [[32m[1minfo     [0m] [1m  BTC>Y0 N99▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:40:00[0m [[32m[1minfo     [0m] [1m  no trades this round, continuing to next window[0m
+[2m2026-08-03 09:40:00[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 7  |  07:40 → 07:45  |  equity: $224.55  |  cash: $224.55  |  open_exposure: $0.00  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:40:00[0m [[32m[1minfo     [0m] [1m  waiting 210s until monitoring starts at 07:43[0m
+[2m2026-08-03 09:43:30[0m [[32m[1minfo     [0m] [1m  BTC>Y62 N37▶YES (mx88)  ETH>Y19 N80▶NO (mx95)  SOL>Y18 N81▶NO (mx95)  XRP>Y14 N86▶NO (mx95)  DOGE>Y14 N85▶NO (mx95)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:43:31[0m [[32m[1minfo     [0m] [1m  BTC>Y62 N37▶YES (mx88)  ETH>Y19 N80▶NO (mx95)  SOL>Y18 N81▶NO (mx95)  XRP>Y14 N86▶NO (mx95)  DOGE>Y14 N85▶NO (mx95)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:43:40[0m [[32m[1minfo     [0m] [1m  BTC>Y62 N37▶YES (mx88)  ETH>Y19 N80▶NO (mx95)  SOL>Y18 N81▶NO (mx95)  XRP>Y14 N86▶NO (mx95)  DOGE>Y14 N85▶NO (mx95)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:43:50[0m [[32m[1minfo     [0m] [1m  BTC>Y64 N35▶YES (mx88)  ETH>Y16 N83▶NO (mx95)  SOL>Y10 N90▶NO (mx88)  XRP>Y5 N95▶NO (mx88)  DOGE>Y7 N93▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:43:50[0m [[32m[1minfo     [0m] [1m  BTC>Y64 N35▶YES (mx88)  ETH>Y16 N83▶NO (mx95)  SOL>Y10 N90▶NO (mx88)  XRP>Y5 N95▶NO (mx88)  DOGE>Y7 N93▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:44:00[0m [[32m[1minfo     [0m] [1m  BTC>Y50 N49▶YES (mx88)  ETH>Y6 N93▶NO (mx88)  SOL>Y5 N94▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:44:10[0m [[32m[1minfo     [0m] [1m  BTC>Y50 N49▶YES (mx88)  ETH>Y6 N93▶NO (mx88)  SOL>Y5 N94▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:44:10[0m [[32m[1minfo     [0m] [1m  BTC>Y50 N49▶YES (mx88)  ETH>Y6 N93▶NO (mx88)  SOL>Y5 N94▶NO (mx88)  XRP>Y3 N96▶NO (mx88)  DOGE>Y4 N95▶NO (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:44:20[0m [[32m[1minfo     [0m] [1m  BTC>Y34 N65▶NO (mx88)  ETH>Y3 N97▶NO (mx88)  SOL>Y3 N96▶NO (mx88)  XRP>Y1 N98▶NO (mx88)  DOGE>Y2 N97▶NO (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:44:30[0m [[32m[1minfo     [0m] [1m  BTC>Y35 N64▶NO (mx88)  ETH>Y1 N98▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y1 N98▶NO (mx88)  DOGE>Y1 N98▶NO (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:44:31[0m [[32m[1minfo     [0m] [1m  BTC>Y35 N64▶NO (mx88)  ETH>Y1 N98▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y1 N98▶NO (mx88)  DOGE>Y1 N98▶NO (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:44:40[0m [[32m[1minfo     [0m] [1m  BTC>Y35 N64▶NO (mx88)  ETH>Y1 N98▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y1 N98▶NO (mx88)  DOGE>Y1 N98▶NO (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:44:40[0m [[32m[1minfo     [0m] [1m  BTC>Y35 N64▶NO (mx88)  ETH>Y1 N98▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y1 N98▶NO (mx88)  DOGE>Y1 N98▶NO (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:44:50[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:44:51[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:44:51[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:44:52[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:44:52[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:44:53[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:44:54[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:44:54[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:44:55[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:44:55[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:44:56[0m [[32m[1minfo     [0m] [1m  BTC>Y27 N72▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y0 N99▶NO (mx88)  XRP>Y0 N99▶NO (mx88)  DOGE>Y0 N99▶NO (mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:45:00[0m [[32m[1minfo     [0m] [1m  no trades this round, continuing to next window[0m
+[2m2026-08-03 09:45:00[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 8  |  07:45 → 07:50  |  equity: $224.55  |  cash: $224.55  |  open_exposure: $0.00  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:45:00[0m [[32m[1minfo     [0m] [1m  waiting 210s until monitoring starts at 07:48[0m
+[2m2026-08-03 09:48:30[0m [[32m[1minfo     [0m] [1m  BTC>Y74 N25▶YES (mx88)  ETH>Y69 N30▶YES (mx88)  SOL>Y61 N38▶YES (mx88)  XRP>Y93 N6▶YES (mx88)  DOGE>Y83 N16▶YES (mx95)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:48:30[0m [[32m[1minfo     [0m] [1m  BTC>Y74 N25▶YES (mx88)  ETH>Y69 N30▶YES (mx88)  SOL>Y61 N38▶YES (mx88)  XRP>Y93 N6▶YES (mx88)  DOGE>Y83 N16▶YES (mx95)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:48:40[0m [[32m[1minfo     [0m] [1m  BTC>Y74 N25▶YES (mx88)  ETH>Y69 N30▶YES (mx88)  SOL>Y61 N38▶YES (mx88)  XRP>Y93 N6▶YES (mx88)  DOGE>Y83 N16▶YES (mx95)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:48:50[0m [[32m[1minfo     [0m] [1m  BTC>Y83 N16▶YES (mx95)  ETH>Y71 N28▶YES (mx88)  SOL>Y62 N37▶YES (mx88)  XRP>Y94 N6▶YES (mx88)  DOGE>Y85 N15▶YES (mx95)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:48:50[0m [[32m[1minfo     [0m] [1m  BTC>Y83 N16▶YES (mx95)  ETH>Y71 N28▶YES (mx88)  SOL>Y62 N37▶YES (mx88)  XRP>Y94 N6▶YES (mx88)  DOGE>Y85 N15▶YES (mx95)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:48:58[0m [[32m[1minfo     [0m] [1m  ▶ ENTER DOGE YES at 89¢ (streak=3)[0m
+[2m2026-08-03 09:48:58[0m [[32m[1minfo     [0m] [1m    filled DOGE YES $5.00 @ 89¢ | equity=$224.55 | cash=$219.44[0m
+[2m2026-08-03 09:49:00[0m [[32m[1minfo     [0m] [1m  BTC>Y35 N64▶NO (mx88)  ETH>Y70 N29▶YES (mx88)  SOL>Y50 N49▶YES (mx88)  XRP>Y95 N5▶YES (mx88)  DOGE>Y89 N11▶YES●(mx95)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:49:01[0m [[32m[1minfo     [0m] [1m  open positions: 1 | resolved: 4[0m
+[2m2026-08-03 09:49:10[0m [[32m[1minfo     [0m] [1m  BTC>Y83 N16▶YES (mx95)  ETH>Y70 N29▶YES (mx88)  SOL>Y62 N37▶YES (mx88)  XRP>Y93 N7▶YES (mx88)  DOGE>Y85 N15▶YES●(mx95)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:49:10[0m [[32m[1minfo     [0m] [1m  BTC>Y83 N16▶YES (mx95)  ETH>Y70 N29▶YES (mx88)  SOL>Y62 N37▶YES (mx88)  XRP>Y93 N7▶YES (mx88)  DOGE>Y85 N15▶YES●(mx95)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:49:20[0m [[32m[1minfo     [0m] [1m  BTC>Y24 N75▶NO (mx88)  ETH>Y86 N13▶YES (mx95)  SOL>Y62 N41▶YES (mx88)  XRP>Y98 N1▶YES (mx88)  DOGE>Y91 N8▶YES●(mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:49:30[0m [[32m[1minfo     [0m] [1m  BTC>Y51 N48▶YES (mx88)  ETH>Y97 N2▶YES (mx88)  SOL>Y80 N19▶YES (mx95)  XRP>Y98 N1▶YES (mx88)  DOGE>Y95 N5▶YES●(mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:49:30[0m [[32m[1minfo     [0m] [1m  BTC>Y51 N48▶YES (mx88)  ETH>Y97 N2▶YES (mx88)  SOL>Y80 N19▶YES (mx95)  XRP>Y98 N1▶YES (mx88)  DOGE>Y95 N5▶YES●(mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:49:40[0m [[32m[1minfo     [0m] [1m  BTC>Y51 N48▶YES (mx88)  ETH>Y97 N2▶YES (mx88)  SOL>Y80 N19▶YES (mx95)  XRP>Y98 N1▶YES (mx88)  DOGE>Y95 N5▶YES●(mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:49:44[0m [[32m[1minfo     [0m] [1m  ▶ ENTER SOL YES at 88¢ (streak=3)[0m
+[2m2026-08-03 09:49:44[0m [[32m[1minfo     [0m] [1m    filled SOL YES $5.00 @ 88¢ | equity=$224.55 | cash=$214.39[0m
+[2m2026-08-03 09:49:45[0m [[32m[1minfo     [0m] [1m  open positions: 2 | resolved: 4[0m
+[2m2026-08-03 09:49:50[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:49:50[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:49:51[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:49:52[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:49:52[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:49:53[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:49:53[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:49:54[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:49:55[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:49:55[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:49:56[0m [[32m[1minfo     [0m] [1m  BTC>Y67 N33▶YES (mx88)  ETH>Y99 N0▶YES (mx88)  SOL>Y88 N11▶YES●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y96 N3▶YES●(mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:49:57[0m [[32m[1minfo     [0m] [1m  BTC>Y24 N75▶NO (mx88)  ETH>Y93 N6▶YES (mx88)  SOL>Y10 N89▶NO●(mx95)  XRP>Y99 N0▶YES (mx88)  DOGE>Y99 N0▶YES●(mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:51:52[0m [[32m[1minfo     [0m] [1m--------------------------------------------------------------------[0m
+[2m2026-08-03 09:51:52[0m [[32m[1minfo     [0m] [1m  TRADES THIS ROUND (2):      [0m
+[2m2026-08-03 09:51:52[0m [[32m[1minfo     [0m] [1m  DOGE  YES  entry=89¢  pending[0m
+[2m2026-08-03 09:51:52[0m [[32m[1minfo     [0m] [1m   SOL  YES  entry=88¢  pending[0m
+[2m2026-08-03 09:51:52[0m [[32m[1minfo     [0m] [1m  ROUND 8 SUMMARY  |  equity: $224.55  |  cash: $214.39  |  open: 2  |  resolved: 4  |  wins: 3  |  losses: 1  |  WR: 3/4  |  invested: $10.00
+====================================================================[0m
+[2m2026-08-03 09:51:52[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 9  |  07:50 → 07:55  |  equity: $224.55  |  cash: $214.39  |  open_exposure: $10.16  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:51:52[0m [[32m[1minfo     [0m] [1m  waiting 98s until monitoring starts at 07:53[0m
+[2m2026-08-03 09:52:26[0m [[32m[1minfo     [0m] [1m  ✗ Solana YES LOST | pnl=$-5.05 | equity=$219.50 | cash=$214.39[0m
+[2m2026-08-03 09:52:29[0m [[32m[1minfo     [0m] [1m  open positions: 1 | resolved: 5[0m
+[2m2026-08-03 09:53:30[0m [[32m[1minfo     [0m] [1m  BTC>Y8 N91▶NO (mx88)  ETH>Y50 N49▶YES (mx88)  SOL>Y9 N90▶NO (mx88)  XRP>Y7 N93▶NO (mx88)  DOGE>Y34 N65▶NO (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:53:40[0m [[32m[1minfo     [0m] [1m  BTC>Y8 N91▶NO (mx88)  ETH>Y50 N49▶YES (mx88)  SOL>Y9 N90▶NO (mx88)  XRP>Y7 N93▶NO (mx88)  DOGE>Y34 N65▶NO (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:53:40[0m [[32m[1minfo     [0m] [1m  BTC>Y8 N91▶NO (mx88)  ETH>Y50 N49▶YES (mx88)  SOL>Y9 N90▶NO (mx88)  XRP>Y7 N93▶NO (mx88)  DOGE>Y34 N65▶NO (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:53:50[0m [[32m[1minfo     [0m] [1m  BTC>Y7 N92▶NO (mx88)  ETH>Y53 N46▶YES (mx88)  SOL>Y8 N91▶NO (mx88)  XRP>Y9 N90▶NO (mx88)  DOGE>Y31 N68▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:53:51[0m [[32m[1minfo     [0m] [1m  BTC>Y7 N92▶NO (mx88)  ETH>Y53 N46▶YES (mx88)  SOL>Y8 N91▶NO (mx88)  XRP>Y9 N90▶NO (mx88)  DOGE>Y31 N68▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:54:00[0m [[32m[1minfo     [0m] [1m  BTC>Y7 N92▶NO (mx88)  ETH>Y53 N46▶YES (mx88)  SOL>Y4 N95▶NO (mx88)  XRP>Y8 N91▶NO (mx88)  DOGE>Y29 N71▶NO (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:54:06[0m [[32m[1minfo     [0m] [1m  ✓ Dogecoin YES WON | pnl=+$0.50 | equity=$220.00 | cash=$220.00[0m
+[2m2026-08-03 09:54:09[0m [[32m[1minfo     [0m] [1m  open positions: 0 | resolved: 6[0m
+[2m2026-08-03 09:54:10[0m [[32m[1minfo     [0m] [1m  BTC>Y7 N92▶NO (mx88)  ETH>Y53 N46▶YES (mx88)  SOL>Y4 N95▶NO (mx88)  XRP>Y8 N91▶NO (mx88)  DOGE>Y29 N71▶NO (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:54:11[0m [[32m[1minfo     [0m] [1m  BTC>Y7 N92▶NO (mx88)  ETH>Y53 N46▶YES (mx88)  SOL>Y4 N95▶NO (mx88)  XRP>Y8 N91▶NO (mx88)  DOGE>Y29 N71▶NO (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:54:20[0m [[32m[1minfo     [0m] [1m  BTC>Y3 N96▶NO (mx88)  ETH>Y68 N31▶YES (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y5 N95▶NO (mx88)  DOGE>Y26 N74▶NO (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:54:20[0m [[32m[1minfo     [0m] [1m  BTC>Y3 N96▶NO (mx88)  ETH>Y68 N31▶YES (mx88)  SOL>Y4 N96▶NO (mx88)  XRP>Y5 N95▶NO (mx88)  DOGE>Y26 N74▶NO (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:54:30[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y89 N11▶YES (mx88)  SOL>Y7 N92▶NO (mx88)  XRP>Y9 N91▶NO (mx88)  DOGE>Y40 N59▶NO (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:54:30[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y89 N11▶YES (mx88)  SOL>Y7 N92▶NO (mx88)  XRP>Y9 N91▶NO (mx88)  DOGE>Y40 N59▶NO (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:54:40[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y89 N11▶YES (mx88)  SOL>Y7 N92▶NO (mx88)  XRP>Y9 N91▶NO (mx88)  DOGE>Y40 N59▶NO (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:54:40[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y89 N11▶YES (mx88)  SOL>Y7 N92▶NO (mx88)  XRP>Y9 N91▶NO (mx88)  DOGE>Y40 N59▶NO (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:54:43[0m [[32m[1minfo     [0m] [1m  ▶ ENTER XRP NO at 88¢ (streak=3)[0m
+[2m2026-08-03 09:54:43[0m [[32m[1minfo     [0m] [1m    filled XRP NO $5.00 @ 88¢ | equity=$220.00 | cash=$214.83[0m
+[2m2026-08-03 09:54:45[0m [[32m[1minfo     [0m] [1m  open positions: 1 | resolved: 6[0m
+[2m2026-08-03 09:54:50[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:54:51[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:54:51[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:54:52[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:54:52[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:54:53[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:54:54[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:54:54[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:54:55[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:54:55[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:54:56[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:54:57[0m [[32m[1minfo     [0m] [1m  BTC>Y2 N97▶NO (mx88)  ETH>Y98 N1▶YES (mx88)  SOL>Y38 N61▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y76 N24▶YES (mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 09:56:41[0m [[32m[1minfo     [0m] [1m--------------------------------------------------------------------[0m
+[2m2026-08-03 09:56:41[0m [[32m[1minfo     [0m] [1m  TRADES THIS ROUND (1):      [0m
+[2m2026-08-03 09:56:41[0m [[32m[1minfo     [0m] [1m   XRP   NO  entry=88¢  pending[0m
+[2m2026-08-03 09:56:41[0m [[32m[1minfo     [0m] [1m  ROUND 9 SUMMARY  |  equity: $220.00  |  cash: $214.83  |  open: 1  |  resolved: 6  |  wins: 4  |  losses: 2  |  WR: 4/6  |  invested: $5.00
+====================================================================[0m
+[2m2026-08-03 09:56:41[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 10  |  07:55 → 08:00  |  equity: $220.00  |  cash: $214.83  |  open_exposure: $5.17  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 09:56:41[0m [[32m[1minfo     [0m] [1m  waiting 109s until monitoring starts at 07:58[0m
+[2m2026-08-03 09:58:21[0m [[32m[1minfo     [0m] [1m  ✓ XRP NO WON | pnl=+$0.51 | equity=$220.51 | cash=$220.51[0m
+[2m2026-08-03 09:58:24[0m [[32m[1minfo     [0m] [1m  open positions: 0 | resolved: 7[0m
+[2m2026-08-03 09:58:30[0m [[32m[1minfo     [0m] [1m  BTC>Y13 N86▶NO (mx88)  ETH>Y1 N98▶NO (mx88)  SOL>Y3 N96▶NO (mx88)  XRP>Y11 N89▶NO (mx88)  DOGE>Y41 N59▶NO (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 09:58:40[0m [[32m[1minfo     [0m] [1m  BTC>Y13 N86▶NO (mx88)  ETH>Y1 N98▶NO (mx88)  SOL>Y3 N96▶NO (mx88)  XRP>Y11 N89▶NO (mx88)  DOGE>Y41 N59▶NO (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 09:58:50[0m [[32m[1minfo     [0m] [1m  BTC>Y32 N67▶NO (mx88)  ETH>Y3 N96▶NO (mx88)  SOL>Y10 N89▶NO (mx88)  XRP>Y16 N84▶NO (mx88)  DOGE>Y53 N47▶YES (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:58:50[0m [[32m[1minfo     [0m] [1m  BTC>Y32 N67▶NO (mx88)  ETH>Y3 N96▶NO (mx88)  SOL>Y10 N89▶NO (mx88)  XRP>Y16 N84▶NO (mx88)  DOGE>Y53 N47▶YES (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 09:59:00[0m [[32m[1minfo     [0m] [1m  BTC>Y31 N68▶NO (mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y8 N92▶NO (mx88)  XRP>Y13 N87▶NO (mx88)  DOGE>Y77 N22▶YES (mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 09:59:10[0m [[32m[1minfo     [0m] [1m  BTC>Y36 N63▶NO (mx88)  ETH>Y3 N96▶NO (mx88)  SOL>Y10 N89▶NO (mx88)  XRP>Y16 N84▶NO (mx88)  DOGE>Y53 N47▶YES (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:59:11[0m [[32m[1minfo     [0m] [1m  BTC>Y36 N63▶NO (mx88)  ETH>Y3 N96▶NO (mx88)  SOL>Y10 N89▶NO (mx88)  XRP>Y16 N84▶NO (mx88)  DOGE>Y53 N47▶YES (mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 09:59:20[0m [[32m[1minfo     [0m] [1m  BTC>Y21 N78▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y4 N95▶NO (mx88)  XRP>Y9 N90▶NO (mx88)  DOGE>Y29 N70▶NO (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:59:20[0m [[32m[1minfo     [0m] [1m  BTC>Y21 N78▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y4 N95▶NO (mx88)  XRP>Y9 N90▶NO (mx88)  DOGE>Y29 N70▶NO (mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 09:59:30[0m [[32m[1minfo     [0m] [1m  BTC>Y25 N74▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y10 N89▶NO (mx88)  DOGE>Y26 N74▶NO (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:59:31[0m [[32m[1minfo     [0m] [1m  BTC>Y25 N74▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y10 N89▶NO (mx88)  DOGE>Y26 N74▶NO (mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 09:59:40[0m [[32m[1minfo     [0m] [1m  BTC>Y25 N74▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y10 N89▶NO (mx88)  DOGE>Y26 N74▶NO (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:59:40[0m [[32m[1minfo     [0m] [1m  BTC>Y25 N74▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y10 N89▶NO (mx88)  DOGE>Y26 N74▶NO (mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 09:59:50[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 09:59:51[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:59:51[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 09:59:52[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:59:53[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 09:59:53[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 09:59:54[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:59:54[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 09:59:55[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:59:56[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 09:59:56[0m [[32m[1minfo     [0m] [1m  BTC>Y9 N90▶NO (mx88)  ETH>Y0 N99▶NO (mx88)  SOL>Y3 N97▶NO (mx88)  XRP>Y31 N68▶NO (mx88)  DOGE>Y14 N85▶NO (mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 10:00:00[0m [[32m[1minfo     [0m] [1m  no trades this round, continuing to next window[0m
+[2m2026-08-03 10:00:00[0m [[32m[1minfo     [0m] [1m====================================================================
+  ROUND 11  |  08:00 → 08:05  |  equity: $220.51  |  cash: $220.51  |  open_exposure: $0.00  |  exposure_pct: 10%  |  max_bet: $12
+  ====================================================================[0m
+[2m2026-08-03 10:00:00[0m [[32m[1minfo     [0m] [1m  waiting 210s until monitoring starts at 08:03[0m
+[2m2026-08-03 10:03:30[0m [[32m[1minfo     [0m] [1m  BTC>Y6 N93▶NO (mx88)  ETH>Y10 N89▶NO (mx88)  SOL>Y8 N91▶NO (mx88)  XRP>Y13 N87▶NO (mx88)  DOGE>Y23 N76▶NO (mx88)  low=88¢  high=95¢  t-90s[0m
+[2m2026-08-03 10:03:40[0m [[32m[1minfo     [0m] [1m  BTC>Y6 N93▶NO (mx88)  ETH>Y10 N89▶NO (mx88)  SOL>Y8 N91▶NO (mx88)  XRP>Y13 N87▶NO (mx88)  DOGE>Y23 N76▶NO (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 10:03:40[0m [[32m[1minfo     [0m] [1m  BTC>Y6 N93▶NO (mx88)  ETH>Y10 N89▶NO (mx88)  SOL>Y8 N91▶NO (mx88)  XRP>Y13 N87▶NO (mx88)  DOGE>Y23 N76▶NO (mx88)  low=88¢  high=95¢  t-80s[0m
+[2m2026-08-03 10:03:43[0m [[32m[1minfo     [0m] [1m  ▶ ENTER XRP NO at 88¢ (streak=3)[0m
+[2m2026-08-03 10:03:43[0m [[32m[1minfo     [0m] [1m    filled XRP NO $5.00 @ 88¢ | equity=$220.51 | cash=$215.40[0m
+[2m2026-08-03 10:03:45[0m [[32m[1minfo     [0m] [1m  open positions: 1 | resolved: 7[0m
+[2m2026-08-03 10:03:50[0m [[32m[1minfo     [0m] [1m  BTC>Y6 N93▶NO (mx88)  ETH>Y7 N92▶NO (mx88)  SOL>Y5 N94▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y22 N78▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 10:03:51[0m [[32m[1minfo     [0m] [1m  BTC>Y6 N93▶NO (mx88)  ETH>Y7 N92▶NO (mx88)  SOL>Y5 N94▶NO (mx88)  XRP>Y12 N88▶NO●(mx88)  DOGE>Y22 N78▶NO (mx88)  low=88¢  high=95¢  t-70s[0m
+[2m2026-08-03 10:03:54[0m [[33m[1mwarning  [0m] [1mstop_called                   [0m
+[2m2026-08-03 10:03:58[0m [[32m[1minfo     [0m] [1m  ▶ ENTER DOGE NO at 88¢ (streak=3)[0m
+[2m2026-08-03 10:03:58[0m [[32m[1minfo     [0m] [1m    filled DOGE NO $5.00 @ 88¢ | equity=$220.51 | cash=$210.29[0m
+[2m2026-08-03 10:04:00[0m [[32m[1minfo     [0m] [1m  BTC>Y5 N94▶NO (mx88)  ETH>Y5 N94▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y5 N95▶NO●(mx88)  DOGE>Y12 N88▶NO●(mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 10:04:00[0m [[32m[1minfo     [0m] [1m  BTC>Y5 N94▶NO (mx88)  ETH>Y5 N94▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y5 N95▶NO●(mx88)  DOGE>Y12 N88▶NO●(mx88)  low=88¢  high=95¢  t-60s[0m
+[2m2026-08-03 10:04:10[0m [[32m[1minfo     [0m] [1m  BTC>Y5 N94▶NO (mx88)  ETH>Y5 N94▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y5 N95▶NO●(mx88)  DOGE>Y12 N88▶NO●(mx88)  low=88¢  high=95¢  t-50s[0m
+[2m2026-08-03 10:04:20[0m [[32m[1minfo     [0m] [1m  BTC>Y3 N96▶NO (mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y5 N95▶NO●(mx88)  DOGE>Y8 N91▶NO●(mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 10:04:21[0m [[32m[1minfo     [0m] [1m  BTC>Y3 N96▶NO (mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y5 N95▶NO●(mx88)  DOGE>Y8 N91▶NO●(mx88)  low=88¢  high=95¢  t-40s[0m
+[2m2026-08-03 10:04:28[0m [[32m[1minfo     [0m] [1m  ▶ ENTER BTC NO at 88¢ (streak=3)[0m
+[2m2026-08-03 10:04:28[0m [[32m[1minfo     [0m] [1m    filled BTC NO $5.00 @ 88¢ | equity=$220.51 | cash=$205.24[0m
+[2m2026-08-03 10:04:30[0m [[32m[1minfo     [0m] [1m  BTC>Y11 N88▶NO●(mx88)  ETH>Y10 N89▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y29 N70▶NO●(mx88)  DOGE>Y38 N62▶NO●(mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 10:04:30[0m [[32m[1minfo     [0m] [1m  BTC>Y11 N88▶NO●(mx88)  ETH>Y10 N89▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y29 N70▶NO●(mx88)  DOGE>Y38 N62▶NO●(mx88)  low=88¢  high=95¢  t-30s[0m
+[2m2026-08-03 10:04:40[0m [[32m[1minfo     [0m] [1m  BTC>Y11 N88▶NO●(mx88)  ETH>Y10 N89▶NO (mx88)  SOL>Y2 N97▶NO (mx88)  XRP>Y29 N70▶NO●(mx88)  DOGE>Y38 N62▶NO●(mx88)  low=88¢  high=95¢  t-20s[0m
+[2m2026-08-03 10:04:50[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 10:04:50[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-10s[0m
+[2m2026-08-03 10:04:51[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-9s[0m
+[2m2026-08-03 10:04:52[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 10:04:52[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-8s[0m
+[2m2026-08-03 10:04:53[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 10:04:54[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-7s[0m
+[2m2026-08-03 10:04:54[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-6s[0m
+[2m2026-08-03 10:04:55[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 10:04:55[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-5s[0m
+[2m2026-08-03 10:04:56[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 10:04:57[0m [[32m[1minfo     [0m] [1m  BTC>Y4 N95▶NO●(mx88)  ETH>Y2 N97▶NO (mx88)  SOL>Y1 N98▶NO (mx88)  XRP>Y28 N71▶NO●(mx88)  DOGE>Y13 N86▶NO●(mx88)  low=88¢  high=95¢  t-4s[0m
+[2m2026-08-03 10:07:01[0m [[32m[1minfo     [0m] [1m--------------------------------------------------------------------[0m
+[2m2026-08-03 10:07:01[0m [[32m[1minfo     [0m] [1m  TRADES THIS ROUND (3):      [0m
+[2m2026-08-03 10:07:01[0m [[32m[1minfo     [0m] [1m   XRP   NO  entry=88¢  pending[0m
+[2m2026-08-03 10:07:01[0m [[32m[1minfo     [0m] [1m  DOGE   NO  entry=88¢  pending[0m
+[2m2026-08-03 10:07:01[0m [[32m[1minfo     [0m] [1m   BTC   NO  entry=88¢  pending[0m
+[2m2026-08-03 10:07:01[0m [[32m[1minfo     [0m] [1m  ROUND 11 SUMMARY  |  equity: $215.97  |  cash: $210.92  |  open: 1  |  resolved: 9  |  wins: 6  |  losses: 3  |  WR: 6/9  |  invested: $15.00
+====================================================================[0m
+[2m2026-08-03 10:07:01[0m [[32m[1minfo     [0m] [1m====================================================================
+  BOT SHUTDOWN  |  rounds: 11  |  final PnL: $-17.08
+  cash: $210.92  |  resolved: 9  |  wins: 6  |  losses: 3
+====================================================================[0m
+[2m2026-08-03 10:07:01[0m [[33m[1mwarning  [0m] [1mpaper_open_positions_dropped  [0m [36mcount[0m=[35m1[0m

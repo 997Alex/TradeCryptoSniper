@@ -55,7 +55,15 @@ crypto_5m:
   # ── entry gate parameters ──
   safety_margin_cents: 5
   entry_price_cents_high: 95
-  entry_price_cents_low: 88
+  entry_price_cents_low: 85
+  # ── safety mechanisms (set any to 0 to restore the original behaviour) ──
+  # Sized from the first 7 trades: both losses were approved at 88¢, one booked
+  # at 93¢, and both leapt into the band (+13¢ in one refresh, and 50¢->88¢ in
+  # 40s) rather than settling there.
+  max_effective_entry_cents: 88   # reject if the fill would book above this
+  max_price_jump_cents: 5         # reject a leap into the band
+  min_entry_seconds_left: 15      # no entries inside the final 15s
+  price_settle_seconds: 20        # a price held this long counts as settled, not spiked
   # ── cross-round / correlation controls ──
   max_total_exposure_pct: 10.0
   max_concurrent_open_positions: 4
