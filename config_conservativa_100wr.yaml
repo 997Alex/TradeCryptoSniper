@@ -66,6 +66,13 @@ crypto_5m:
   price_settle_seconds: 20        # a price held this long counts as settled, not spiked
   # ── cross-round / correlation controls ──
   max_total_exposure_pct: 10.0
+  # Do NOT raise this to 5 without also bounding the batch in the entry loop.
+  # The three caps are read at crypto_bot.py:719/730/737, all BEFORE the first
+  # await at :781, while :520 opens the batch with asyncio.gather -- so every
+  # position in a batch tests the caps against identical pre-batch state. At 4
+  # this is masked at the boundary (4 >= 4 blocks the whole batch); at 5 a
+  # 2-coin batch on a full book yields 6 open and a 5-coin batch yields 9,
+  # i.e. ~18% of equity against the 10% cap above.
   max_concurrent_open_positions: 4
   min_net_edge_cents: 4
   gas_buffer_cents: 1
