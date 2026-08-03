@@ -8,3 +8,4 @@ logs/
 data/
 bucket_stats.json
 /tmp/crypto_bot_kill.lock
+trades.jsonl

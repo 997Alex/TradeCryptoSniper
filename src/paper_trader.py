@@ -36,6 +36,9 @@ class PaperPosition:
     won: bool | None = None
     resolve_timestamp: float | None = None
     payout_cents: Decimal = Decimal("0")
+    # Research context only -- never read by any decision path. Populated by
+    # `annotate()` at entry and flushed to data/trades.jsonl at resolution.
+    meta: dict = field(default_factory=dict)
 
 
 class PaperTrader:
@@ -207,6 +210,14 @@ class PaperTrader:
                 size=effective_size,
                 entry_price_cents=effective_price_cents,
                 cost_cents=cost_cents,
+                # The quoted mid is what the entry gate compared against; the
+                # booked price is what we actually paid. They differ by the
+                # slippage model, and ROUND_DOWN often erases that difference
+                # entirely at 85-88c -- which is invisible unless both are kept.
+                meta={
+                    "quoted_mid_cents": int(base_price_cents),
+                    "slippage_pct_modeled": float(sp),
+                },
             )
             self._open_positions[token_id] = pos
 
@@ -246,6 +257,68 @@ class PaperTrader:
                 cost_cents=cost_cents,
             )
 
+    async def annotate(self, token_id: str, **fields: Any) -> None:
+        """Attach entry-time research context to an open position.
+
+        Purely additive: `meta` is never read by the entry gate, the sizing
+        ladder, the exposure caps or the circuit breakers. It exists so that
+        data/trades.jsonl can answer questions the aggregate stats cannot --
+        which window a trade belonged to (same-window trades are correlated, so
+        they are not independent samples), how much time was left, what the gate
+        allowed, and what the bucket win rate was at the moment of the decision.
+        """
+        async with self._lock:
+            pos = self._open_positions.get(token_id)
+            if pos is not None:
+                pos.meta.update(fields)
+
+    def _append_ledger(self, pos: PaperPosition) -> None:
+        """One JSON line per resolved trade. Append-only, never rewritten.
+
+        `bucket_stats.json` aggregates by price bucket and keeps no timestamp,
+        and `_resolved_positions` is in-memory only -- a restart loses it, which
+        already happened once. Without this file the reliability curve, the
+        walk-forward split and the correlated-cluster correction are all
+        impossible to compute after the fact.
+
+        Failure here must never affect trading, so everything is swallowed.
+        """
+        try:
+            pnl = pos.payout_cents - pos.cost_cents
+            row = {
+                "v": 1,
+                "entry_ts": round(pos.entry_timestamp, 3),
+                # UTC, not localtime: entry_ts and window_ts are epoch seconds,
+                # so a localtime string would disagree with them by the UTC
+                # offset and would run backwards across the DST rollback,
+                # corrupting any sort or day-bucketing that trusted it.
+                "entry_iso": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(pos.entry_timestamp)),
+                "resolve_ts": round(pos.resolve_timestamp or 0.0, 3),
+                "won": bool(pos.won),
+                "side": pos.side,
+                "token_id": pos.token_id,
+                "market_id": pos.market_id,
+                "question": pos.question,
+                "booked_fill_cents": int(pos.entry_price_cents),
+                "size": float(pos.size),
+                "cost_cents": int(pos.cost_cents),
+                "payout_cents": int(pos.payout_cents),
+                "pnl_cents": int(pnl),
+                "bucket": self._price_bucket(int(pos.entry_price_cents)),
+                # What the slippage model actually cost, in cents. The modelled
+                # percentage alone cannot answer this: ROUND_DOWN discards the
+                # markup entirely at 85-88c, so this field is 0 whenever the
+                # model fired but changed nothing.
+                "realized_markup_cents": int(pos.entry_price_cents) - int(pos.meta.get("quoted_mid_cents", pos.entry_price_cents)),
+                "balance_after_cents": float(self._balance_cents),
+                **pos.meta,
+            }
+            path = Path(self._state_path).parent / "trades.jsonl"
+            with open(path, "a", encoding="utf-8") as fh:
+                fh.write(json.dumps(row, sort_keys=True) + "\n")
+        except Exception as exc:
+            log.warning("trade_ledger_append_failed", error=str(exc))
+
     async def resolve_position(self, token_id: str, won: bool):
         async with self._lock:
             pos = self._open_positions.get(token_id)
@@ -275,6 +348,7 @@ class PaperTrader:
 
             self._resolved_positions.append(pos)
             del self._open_positions[token_id]
+            self._append_ledger(pos)
         self._save_stats()
         self._save_bot_state()
 

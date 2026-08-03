@@ -68,6 +68,9 @@ class CryptoBot:
                 # run once the operator has cleared every deliberate gate.
                 raise SystemExit(f"REFUSING TO RUN ARMED -- {why}")
             self._exec = executor
+        # Stamped onto every ledger row so paper and live trades can never be
+        # pooled by accident when the file spans both.
+        self._mode = "live" if arm.live else "paper"
         log.info("execution_mode", mode=str(arm))
 
         self._running = False
@@ -783,6 +786,39 @@ class CryptoBot:
         )
 
         if result.status == "filled":
+            # Research context for data/trades.jsonl. Nothing here is read back
+            # by any decision path -- it records what the bot could see at the
+            # instant it decided, so the decision can be audited later.
+            await self._paper.annotate(
+                token_id,
+                coin=coin,
+                # Window identity matters more than the timestamp: trades opened
+                # in the same 5-minute window are correlated (measured phi=0.14
+                # across coins), so they are not independent samples and every
+                # confidence interval has to group by this.
+                window_ts=(int(time.time()) // WINDOW_SECONDS) * WINDOW_SECONDS,
+                seconds_left_at_entry=remaining_s if remaining_s is not None else -1,
+                open_at_entry=open_positions_count,
+                streak=self._price_streak.get(coin, 0),
+                # None on the early-entry and deadline-fallback paths: those
+                # never pass remaining_s AND bypass the win-rate gate entirely,
+                # so any number here would assert a ceiling that was never
+                # applied -- and would read as the gate being violated.
+                max_entry_allowed_cents=(
+                    self._win_rate_max_entry(coin, price_cents, remaining_s)
+                    if remaining_s is not None else None
+                ),
+                bucket_win_rate_at_entry=round(
+                    self._paper.bucket_win_rate(price_cents, default=c.default_win_rate), 4
+                ),
+                # `price_cents` is already truncated to whole cents by
+                # _parse_prices, losing up to 1c downward -- larger than the
+                # 0.8c ask premium we want to measure. Keep Gamma's raw string.
+                quoted_raw=(market or {}).get("outcomePrices"),
+                liquidity_usd=round(liquidity, 2),
+                invest_usd=float(invest),
+                mode=self._mode,
+            )
             log.info(f"  ▶ ENTER {coin.upper()} {side} at {price_cents}¢ (streak={self._price_streak.get(coin, 0)})")
             trade = {"coin": coin, "side": side, "entry": price_cents, "won": None, "profit": Decimal("0")}
             self._round_trades.append(trade)
