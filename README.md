@@ -59,6 +59,8 @@ lo prezza il mercato. L'unica "previsione" è implicita nel prezzo stesso.
 wr        = bucket_win_rate(prezzo)        # storico persistito, default 0.60
 breakeven = int(wr * 100)
 max_entry = breakeven - safety_margin_cents
+if remaining_s <= 10:  max_entry += 2      # irraggiungibile con min_entry_seconds_left: 15
+elif remaining_s <= 36: max_entry += 1     # attivo per ogni ingresso fra t-36s e t-15s
 max_entry = clamp(max_entry, entry_price_cents_low, entry_price_cents_high)
 ```
 
@@ -67,15 +69,17 @@ max_entry = clamp(max_entry, entry_price_cents_low, entry_price_cents_high)
 `entry_price_cents_low <= prezzo <= max_entry`, con un win rate basso la banda ammissibile è un
 **singolo valore**, non un intervallo:
 
-| win rate del bucket | banda ammessa (con `low: 85`) |
-|---|---|
-| 0.60 (default, nessuno storico) | **85¢** soltanto |
-| 0.71 | **85¢** soltanto |
-| 0.90 | **85¢** soltanto |
-| 0.94 | 85-89¢ |
-| 1.00 | 85-95¢ |
+| win rate del bucket | banda (t > 36 s) | banda (t-36s → t-15s, bonus +1) |
+|---|---|---|
+| 0.60 (default, nessuno storico) | **85¢** soltanto | **85¢** soltanto |
+| 0.71 | **85¢** soltanto | **85¢** soltanto |
+| 0.90 | **85¢** soltanto | 85-86¢ |
+| 0.91 | 85-86¢ | 85-87¢ |
+| 0.92 | 85-87¢ | 85-88¢ |
+| 0.94 | 85-89¢ | 85-90¢ |
+| 1.00 | 85-95¢ | 85-95¢ |
 
-Serve un win rate **≥ 0.94** perché la banda si apra. Di conseguenza il bot alterna due regimi: o
+Serve un win rate **≥ 0.91** perché la banda si apra (**≥ 0.90** nel tratto t-36s → t-15s, dove scatta il bonus +1). Di conseguenza il bot alterna due regimi: o
 compra a un solo prezzo, oppure — dopo una serie perfetta — compra su tutta la banda ai prezzi
 peggiori. Una singola perdita richiude tutto. Il file di config si chiama `100wr` proprio per
 questo: opera in ampiezza solo finché il record è perfetto.
@@ -101,6 +105,7 @@ invest = min(invest, max_bet_usd_cap)
 invest *= COIN_LIQUIDITY_RANK[coin]          # btc 1.0, eth 0.9, sol 0.7, xrp 0.5, doge 0.4
 invest *= post_loss_reduction                # 0.50 dopo una perdita
 invest /= (1 + posizioni_aperte)             # smorzamento di correlazione
+invest = round_half_up(invest, 0)            # dollari interi
 invest = min(invest, esposizione_residua_round, esposizione_residua_globale)
 invest = max(invest, min_bet_usd)            # <-- applicato PER ULTIMO
 size   = invest / prezzo
@@ -117,9 +122,12 @@ size   = invest / prezzo
 | Liquidità | × | | Tempo residuo | × |
 |---|---|---|---|---|
 | ≥ $10.000 | 1.0 | | > 36 s | 1.0 |
-| ≥ $1.000 | 1.5 | | 10-36 s | 1.5 |
-| ≥ $200 | 3.0 | | 3-10 s | 2.0 |
-| < $200 | 5.0 | | < 3 s | 3.0 |
+| ≥ $1.000 | 1.5 | | 11-36 s | 1.5 |
+| ≥ $200 | 3.0 | | 4-10 s | 2.0 |
+| < $200 | 5.0 | | ≤ 3 s | 3.0 |
+
+Con `min_entry_seconds_left: 15` i moltiplicatori 2.0 e 3.0 **non sono raggiungibili** da un
+ingresso: restano visibili solo nella telemetria di fine finestra.
 
 Esempio reale misurato: SOL con book sottile a `t-6s` → `1.0 × 3 × 2 = 6%` → una decisione presa a
 88¢ è stata registrata a **93¢**.
@@ -128,7 +136,7 @@ Esempio reale misurato: SOL con book sottile a `t-6s` → `1.0 × 3 × 2 = 6%` �
 
 **Non esiste.** Nessuno stop loss, nessun take profit, nessuna vendita. Ogni posizione è tenuta
 fino alla risoluzione. Una risoluzione è riconosciuta solo se il mercato è `closed == true` **e**
-un esito è ≥ 0.999 mentre l'altro è ≤ 0.001. In pratica ciò avviene **5-10 minuti dopo** la fine
+un esito è ≥ 0.999 mentre l'altro è ≤ 0.001. In pratica ciò avviene **2-4 minuti dopo** la fine
 della finestra, quindi il riepilogo di round mostra quasi sempre posizioni non risolte, e il
 monitor in background le contabilizza poco dopo.
 
@@ -152,8 +160,8 @@ cache-control: public, max-age=300
 ```
 
 **Un TTL di 300 secondi su un mercato che dura 300 secondi.** Senza contromisure il bot interroga
-240 volte in una finestra e riceve sempre lo stesso identico snapshot congelato all'inizio della
-finestra.
+~150-175 volte per coin in una finestra (~800 richieste sulle 5 coin) e riceve sempre lo stesso
+identico snapshot, congelato all'inizio della finestra.
 
 Misurazione effettuata: tutte e 5 le coin con `outcomePrices` **identici byte per byte per 115
 secondi consecutivi** (BTC fermo a 68¢, XRP e DOGE a 51¢) mentre l'order book CLOB reale si muoveva
@@ -184,9 +192,10 @@ pagato**. Questa guardia calcola il prezzo dopo slippage — con la stessa aritm
 la soglia.
 
 > **Nota importante sull'accoppiamento**: questa soglia agisce sul prezzo *slippato*, mentre
-> `entry_price_cents_low` agisce su quello *quotato*. Con il pavimento a 88¢ e il cap a 88¢ il bot
-> **non esegue alcun trade** (a 88¢ quotati qualunque slippage porta sopra 88). È per questo che il
-> pavimento è stato abbassato a 85¢. Cambiando uno dei due valori, ricontrollare l'altro.
+> `entry_price_cents_low` agisce su quello *quotato*. Con il pavimento a 88¢ e il cap a 88¢ passa
+> **solo il caso di slippage minimo** (1.0%: book ≥ $10.000 e più di 36 s residui), che arriva
+> esattamente a 88¢: ogni altro scenario supera il cap. In pratica gli ingressi si riducono a
+> pochissimi fill nel migliore dei casi. È per questo che il pavimento è stato abbassato a 85¢. Cambiando uno dei due valori, ricontrollare l'altro.
 
 ### 2. `max_price_jump_cents` — guard anti-spike
 
@@ -341,7 +350,8 @@ in corso viene completata:
 
 ```bash
 touch /home/ubuntu/projects/TradeCryptoSniper/KILL
-# attendere che il log mostri "open positions: 0" (di norma < 5 minuti)
+# attendere che non compaiano più righe ▶ ENTER / filled e che l'ultimo
+# conteggio "open positions: N" sia 0 (di norma < 5 minuti)
 systemctl --user stop cryptosniper
 rm /home/ubuntu/projects/TradeCryptoSniper/KILL     # altrimenti non riparte
 ```
@@ -390,8 +400,9 @@ bug.
 ## Modalità live (armamento)
 
 > **Il paper trading scrive le stesse identiche righe di log, le stesse statistiche e lo stesso
-> file di stato di una sessione reale.** L'unico modo per sapere con certezza in quale modalità si
-> è è la riga `execution_mode` all'avvio.
+> file di stato di una sessione reale.** All'avvio la modalità è dichiarata dalla riga
+> `execution_mode`; a regime l'unica differenza osservabile è la riga `LIVE FILL … order=…`, che il
+> paper non emette mai. Righe ENTER/filled, statistiche e file di stato sono invece identici.
 
 ### Prerequisiti
 
@@ -481,14 +492,16 @@ d'ambiente `CRYPTOSNIPER_CONFIG`.
 
 ```yaml
 paper_trading:
-  initial_balance_usd: 228        # allineare al collaterale reale: i cap sono percentuali
+  initial_balance_usd: 228        # letto SOLO se data/bot_state.json è assente:
+                                  # per riallineare il bankroll va cancellato anche quello
 
 trading:
   max_slippage_pct: 1.0           # base del modello di slippage
   default_fee_pct: 0.5            # usato SOLO nel filtro di costo, non addebitato
 
 crypto_5m:
-  monitor_start_seconds: 90       # ampiezza della finestra di ingresso
+  monitor_start_seconds: 90       # inizio monitoraggio; la finestra di ingresso reale è
+                                  # 90 − min_entry_seconds_left = 75 s
   execute_at_seconds: 20
   poll_interval_seconds: 0.5      # accoppiato alla conferma a 3 poll: non toccare isolatamente
   min_resolve_buffer_seconds: 5
@@ -512,7 +525,8 @@ crypto_5m:
   loss_cooldown_seconds: 3600
   loss_size_multiplier: 0.50
   win_streak_restore: 3
-  max_total_exposure_pct: 10.0
+  max_total_exposure_pct: 10.0    # % dell'equity, su tutti i round
+  max_exposure_per_round_pct: 10.0 # % della CASSA, per singolo round
   max_concurrent_open_positions: 4
   min_liquidity_usd_entry: 200.0
   min_net_edge_cents: 4
@@ -546,7 +560,7 @@ non sul win rate.
 | win rate | 67% | 100% |
 | PnL | **−$12.03** | **+$5.46** |
 | markup medio di slippage | +1.9¢ | +0.9¢ |
-| fill sopra 88¢ | 4 su 10 | **0 su 8** |
+| fill sopra 88¢ | 6 su 9 | **0 su 8** |
 | bucket `90-94¢` | 6 trade, **−$8.24** | vuoto |
 
 ### Onestà statistica
@@ -561,12 +575,14 @@ non sul win rate.
 
 ### Difetti noti e non corretti
 
-1. **Il ciclo di feedback del win rate è distorto.** Il cancello interroga il bucket del prezzo
-   *quotato*, ma le statistiche vengono scritte nel bucket del prezzo *riempito*. I fill con
-   slippage elevato — che perdono più spesso — finiscono in un bucket diverso da quello che guida
-   le decisioni, che risulta quindi sistematicamente troppo ottimista.
+1. **Il ciclo di feedback del win rate è disallineato.** Il cancello interroga il bucket del prezzo
+   *quotato*, ma le statistiche vengono scritte nel bucket del prezzo *riempito*. Oggi il difetto è
+   **mascherato dalla granularità dei bucket**: con `max_effective_entry_cents: 88` entrambi i
+   prezzi cadono sempre in `78-89¢`. Tornerebbe a manifestarsi alzando il cap sopra 89¢, come
+   accadeva nel baseline, dove 6 fill su 9 finivano in `90-94¢` mentre il cancello continuava a
+   leggere `78-89¢`.
 2. **La banda si apre con un solo trade.** Una vittoria porta il bucket a 100% e spalanca la banda;
-   servono poi ~14 vittorie consecutive per riaprirla dopo una sconfitta. `min_data_trades` esiste
+   servono poi ~10 vittorie consecutive per riaprirla dopo una sconfitta. `min_data_trades` esiste
    ma non è collegato.
 3. **Una guardia che rifiuta una coin può liberare uno slot per un'altra**, perché i cap di
    concorrenza ed esposizione in `_open_position` dipendono dall'ordine. Comportamento riprodotto e
